@@ -1,35 +1,55 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 class BibliotecaApp {
     private List<Book> bookList;
     private List<String> optionList;
+    private MockedIO mockedIO;
 
-    BibliotecaApp(List<Book> bookList, List<String> optionList) {
+    BibliotecaApp(List<Book> bookList, List<String> optionList, MockedIO mockedIO) {
+        this.bookList = bookList;
+        this.optionList = optionList;
+        this.mockedIO = mockedIO;
+    }
+
+    public BibliotecaApp(List<Book> bookList, List<String> optionList) {
         this.bookList = bookList;
         this.optionList = optionList;
     }
 
-    void showWelcome() {
-        System.out.println("Welcome, App started");
+    public BibliotecaApp(List<Book> bookList) {
+        this.bookList = bookList;
     }
 
-    void showBookList() {
+    void showWelcome() {
+        mockedIO.output("Welcome, App stated");
+    }
+
+    void listBooks() {
         for (Book book : bookList) {
-            System.out.println(book.getName());
+            mockedIO.output(book.getAll());
         }
     }
 
-    void showBookListWithAttributes() {
+    void listBooksWithAllAttributes() {
         for (Book book : bookList) {
-            System.out.println(book.getAll());
+            mockedIO.output(book.getAll());
         }
     }
 
     void showOptions() {
         optionList.forEach(System.out::println);
     }
+
+    boolean selectOption(String selectedOption) {
+        switch (selectedOption.toUpperCase()) {
+            case "LB":
+                listBooksWithAllAttributes();
+                return true;
+            default:
+                return false;
+        }
+    }
+
 }

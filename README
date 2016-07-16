@@ -11,7 +11,7 @@ As a customer, I'd like the list of all books to include each books Author and Y
 so that I can be confident that I have found the book I am looking for. The book listing should
 have columns for this information.
 
-Main Menu  - As a customer, instead of automatically seeing the book list, I would like to see
+\/ Main Menu  - As a customer, instead of automatically seeing the book list, I would like to see
 a list of options and be able to choose one. For now, the only option should be 'List Books'.
 All future options should be added to this menu also.
 
