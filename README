@@ -26,10 +26,10 @@ As a customer, I would like to continue choosing options until I choose to 'Quit
 As a librarian, I would like customers to be able to check-out a book. Checked out books should
 not appear in the list of all library books.
 
-Successful Checkout -
+\/ Successful Checkout -
 As a customer, I would like to know that a book has been checked out by seeing the message “Thank you! Enjoy the book”.
 
-Unsuccessful Checkout -
+\/ Unsuccessful Checkout -
 As a customer, I would like to be notified if the book I tried to check-out is not available by seeing the message,
 “That book is not available.”, so that I know that I need to select a different book or fix my spelling error.
 

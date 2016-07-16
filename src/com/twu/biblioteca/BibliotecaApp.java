@@ -90,9 +90,11 @@ class BibliotecaApp {
                 if (book.getName().equals(inputOfBookName)) {
                     bookList.remove(book);
                     checkBookList.add(book);
+                    mockedIO.output("Thank you! Enjoy the book");
                     return true;
                 }
             }
+            mockedIO.output("That book is not available");
             return false;
         }
     }

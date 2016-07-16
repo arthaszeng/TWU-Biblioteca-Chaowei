@@ -24,7 +24,9 @@ public class BibliotecaTest {
     @Test
     public void shouldShowWelcomeWhenAppStart() throws Exception {
         BibliotecaApp bibliotecaApp = new BibliotecaApp(new ArrayList<>(), new ArrayList<>(), new MockedIO());
+
         bibliotecaApp.showWelcome();
+
         assertEquals("Welcome, App started\n", outputStream.toString());
     }
 
@@ -33,7 +35,9 @@ public class BibliotecaTest {
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book("myBook", "Sli", "2016"));
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), mockedIO);
+
         bibliotecaApp.listBooks(bibliotecaApp.bookList);
+
         verify(mockedIO, times(1)).output("myBook");
     }
 
@@ -42,7 +46,9 @@ public class BibliotecaTest {
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book("myBook", "Sli", "2016"));
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), mockedIO);
+
         bibliotecaApp.listBooksWithAllAttributes(bookList);
+
         verify(mockedIO, times(1)).output("myBook\tSli\t2016");
     }
 
@@ -52,7 +58,9 @@ public class BibliotecaTest {
         List<String> optionList = new ArrayList<>();
         optionList.add("[LB] List Books");
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
+
         bibliotecaApp.showOptions();
+
         verify(mockedIO, times(1)).output("[LB] List Books");
     }
 
@@ -62,7 +70,9 @@ public class BibliotecaTest {
         List<String> optionList = new ArrayList<>();
         bookList.add(new Book ("myBook", "Sli", "2016"));
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
+
         when(mockedIO.input()).thenReturn("LB");
+
         assertTrue( bibliotecaApp.selectOption());
         verify(mockedIO, times(1)).output("myBook\tSli\t2016");
     }
@@ -72,7 +82,9 @@ public class BibliotecaTest {
         List<Book> bookList = new ArrayList<>();
         List<String> optionList = new ArrayList<>();
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
+
         when(mockedIO.input()).thenReturn("wrongSelection");
+
         assertTrue(bibliotecaApp.selectOption());
         verify(mockedIO, times(1)).output("Select a valid option!");
     }
@@ -82,8 +94,10 @@ public class BibliotecaTest {
         List<Book> bookList = new ArrayList<>();
         List<String> optionList = new ArrayList<>();
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
+
         when(mockedIO.input()).thenReturn("QUIT");
         bibliotecaApp.keepCycle();
+
         verify(mockedIO, times(1)).output("Over!");
     }
 
@@ -114,7 +128,7 @@ public class BibliotecaTest {
         bookList.add(new Book("myBook", "Sli", "2016"));
         optionList.add("[LB] List Books");
         optionList.add("[CB] Checkout One Book");
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(),optionList, mockedIO);
 
         bibliotecaApp.listBooks(bibliotecaApp.bookList);
         when(mockedIO.input()).thenReturn("myBook");
@@ -141,6 +155,35 @@ public class BibliotecaTest {
         verify(mockedIO, times(1)).output("myBook");
     }
 
+    @Test
+    public void shouldPrintSuccessfulMessageWhenCheckOutOneBookSuccessfully() throws Exception {
+        List<Book> bookList = new ArrayList<>();
+        List<String> optionList = new ArrayList<>();
+        bookList.add(new Book("myBook", "Sli", "2016"));
+        optionList.add("[LB] List Books");
+        optionList.add("[CB] Checkout One Book");
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), optionList, mockedIO);
 
+        when(mockedIO.input()).thenReturn("myBook");
+        boolean checkOutResult = bibliotecaApp.checkoutOneBook();
 
+        assertTrue(checkOutResult);
+        verify(mockedIO, times(1)).output("Thank you! Enjoy the book");
+    }
+
+    @Test
+    public void shouldPrintErrorMessageWhenCheckoutBookFailed() throws Exception {
+        List<Book> bookList = new ArrayList<>();
+        List<String> optionList = new ArrayList<>();
+        bookList.add(new Book("myBook", "Sli", "2016"));
+        optionList.add("[LB] List Books");
+        optionList.add("[CB] Checkout One Book");
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), optionList, mockedIO);
+
+        when(mockedIO.input()).thenReturn("wrongName");
+        boolean checkOutResult = bibliotecaApp.checkoutOneBook();
+
+        assertFalse(checkOutResult);
+        verify(mockedIO, times(1)).output("That book is not available");
+    }
 }
