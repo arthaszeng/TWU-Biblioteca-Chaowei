@@ -13,15 +13,6 @@ class BibliotecaApp {
         this.mockedIO = mockedIO;
     }
 
-    public BibliotecaApp(List<Book> bookList, List<String> optionList) {
-        this.bookList = bookList;
-        this.optionList = optionList;
-    }
-
-    public BibliotecaApp(List<Book> bookList) {
-        this.bookList = bookList;
-    }
-
     void showWelcome() {
         mockedIO.output("Welcome, App started");
     }
@@ -44,7 +35,9 @@ class BibliotecaApp {
         }
     }
 
-    boolean selectOption(String selectedOption) {
+    boolean selectOption() {
+        showOptions();
+        String selectedOption = mockedIO.input();
         switch (selectedOption.toUpperCase()) {
             case "LB":
                 listBooksWithAllAttributes();

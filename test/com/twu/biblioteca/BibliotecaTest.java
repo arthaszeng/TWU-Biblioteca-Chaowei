@@ -11,9 +11,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 
 public class BibliotecaTest {
@@ -66,7 +64,8 @@ public class BibliotecaTest {
         List<String> optionList = new ArrayList<>();
         bookList.add(new Book ("myBook", "Sli", "2016"));
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
-        assertTrue( bibliotecaApp.selectOption("LB"));
+        when(mockedIO.input()).thenReturn("LB");
+        assertTrue( bibliotecaApp.selectOption());
         verify(mockedIO, times(1)).output("myBook\tSli\t2016");
     }
 
@@ -77,8 +76,11 @@ public class BibliotecaTest {
         bookList.add(new Book ("myBook", "Sli", "2016"));
         optionList.add("[LB] List Books");
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
-        assertFalse( bibliotecaApp.selectOption("wrongOption"));
+        when(mockedIO.input()).thenReturn("wrongSelection");
+        assertFalse( bibliotecaApp.selectOption());
         verify(mockedIO, times(1)).output("Select a valid option!");
-        verify(mockedIO, times(1)).output("[LB] List Books");
+        verify(mockedIO, times(2)).output("[LB] List Books");
     }
+
+
 }
