@@ -67,6 +67,13 @@
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="cwzeng">
+      <words>
+        <w>biblioteca</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/TWU_Biblioteca-master.iml" filepath="$PROJECT_DIR$/.idea/modules/TWU_Biblioteca-master.iml" />
