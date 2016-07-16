@@ -22,7 +22,7 @@ As a customer, I would like to be notified when I choose an invalid option with 
 \/ Quit -
 As a customer, I would like to continue choosing options until I choose to 'Quit'.
 
-Checkout Book -
+\/ Checkout Book -
 As a librarian, I would like customers to be able to check-out a book. Checked out books should
 not appear in the list of all library books.
 

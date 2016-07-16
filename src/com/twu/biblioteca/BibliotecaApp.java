@@ -5,12 +5,21 @@ import java.util.List;
 import java.util.Scanner;
 
 class BibliotecaApp {
-    private List<Book> bookList;
+    List<Book> bookList;
+    List<Book> checkBookList;
     private List<String> optionList;
     private MockedIO mockedIO;
 
+
     BibliotecaApp(List<Book> bookList, List<String> optionList, MockedIO mockedIO) {
         this.bookList = bookList;
+        this.optionList = optionList;
+        this.mockedIO = mockedIO;
+    }
+
+    BibliotecaApp(List<Book> bookList, List<Book> checkedBookList, List<String> optionList, MockedIO mockedIO) {
+        this.bookList = bookList;
+        this.checkBookList = checkedBookList;
         this.optionList = optionList;
         this.mockedIO = mockedIO;
     }
@@ -19,13 +28,13 @@ class BibliotecaApp {
         mockedIO.output("Welcome, App started");
     }
 
-    void listBooks() {
+    void listBooks(List<Book> bookList) {
         for (Book book : bookList) {
             mockedIO.output(book.getName());
         }
     }
 
-    void listBooksWithAllAttributes() {
+    void listBooksWithAllAttributes(List<Book> bookList) {
         for (Book book : bookList) {
             mockedIO.output(book.getAll());
         }
@@ -38,9 +47,9 @@ class BibliotecaApp {
     }
 
     boolean selectOption() {
-        switch (mockedIO.input()) {
+        switch (mockedIO.input().toUpperCase()) {
             case "LB":
-                listBooksWithAllAttributes();
+                listBooksWithAllAttributes(bookList);
                 return true;
             case "QUIT":
                 mockedIO.output("Over!");
@@ -70,5 +79,21 @@ class BibliotecaApp {
         BibliotecaApp bibliotecaApp = new BibliotecaApp(bookList, optionList, new MockedIO());
         bibliotecaApp.showWelcome();
         bibliotecaApp.keepCycle();
+    }
+
+    boolean checkoutOneBook() {
+        String inputOfBookName = mockedIO.input();
+        if (bookList.isEmpty()) {
+            return false;
+        } else {
+            for (Book book : bookList) {
+                if (book.getName().equals(inputOfBookName)) {
+                    bookList.remove(book);
+                    checkBookList.add(book);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
