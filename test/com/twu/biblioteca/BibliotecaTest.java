@@ -20,7 +20,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldShowWelcomeWhenAppStart() throws Exception {
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(new ArrayList<>());
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(new ArrayList<>(), new ArrayList<>());
         bibliotecaApp.showWelcome();
         assertEquals("Welcome, App started\n", outputStream.toString());
     }
@@ -29,7 +29,7 @@ public class BibliotecaTest {
     public void shouldShowBookList() throws Exception {
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book("myBook", "Sli", "2016"));
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList);
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>());
         bibliotecaApp.showBookList();
         assertEquals("myBook\n", outputStream.toString());
     }
@@ -38,8 +38,19 @@ public class BibliotecaTest {
     public void shouldShowBookListWithAllAttributes() throws Exception {
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book("myBook", "Sli", "2016"));
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList);
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>());
         bibliotecaApp.showBookListWithAttributes();
         assertEquals("myBook\tSli\t2016\n", outputStream.toString());
+    }
+
+    @Test
+    public void shouldShowListBooksOfOptions() throws Exception {
+        List<Book> bookList = new ArrayList<>();
+        List<String> optionList = new ArrayList<>();
+        bookList.add(new Book("myBook", "Sli", "2016"));
+        optionList.add("[LB] List Books");
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList);
+        bibliotecaApp.showOptions();
+        assertEquals("[LB] List Books\n", outputStream.toString());
     }
 }

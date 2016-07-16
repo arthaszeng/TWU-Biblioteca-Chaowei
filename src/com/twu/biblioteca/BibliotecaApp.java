@@ -5,10 +5,12 @@ import java.util.Iterator;
 import java.util.List;
 
 class BibliotecaApp {
-    private List<Book> bookList = new ArrayList<>();
+    private List<Book> bookList;
+    private List<String> optionList;
 
-    BibliotecaApp(List<Book> bookList) {
+    BibliotecaApp(List<Book> bookList, List<String> optionList) {
         this.bookList = bookList;
+        this.optionList = optionList;
     }
 
     void showWelcome() {
@@ -25,5 +27,9 @@ class BibliotecaApp {
         for (Book book : bookList) {
             System.out.println(book.getAll());
         }
+    }
+
+    void showOptions() {
+        optionList.forEach(System.out::println);
     }
 }
