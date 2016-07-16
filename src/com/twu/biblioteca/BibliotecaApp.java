@@ -1,12 +1,10 @@
 package com.twu.biblioteca;
 
-public class BibliotecaApp {
-
-    public static void main(String[] args) {
-        System.out.println("Hello, world!");
-    }
+class BibliotecaApp {
 
     void showWelcome() {
         System.out.println("Welcome, App started");
     }
+
+
 }
