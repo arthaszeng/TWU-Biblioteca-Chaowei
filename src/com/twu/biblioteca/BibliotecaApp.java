@@ -15,10 +15,15 @@ class BibliotecaApp {
         System.out.println("Welcome, App started");
     }
 
-
     void showBookList() {
-        for (Book aBookList : bookList) {
-            System.out.println((aBookList).getName());
+        for (Book book : bookList) {
+            System.out.println(book.getName());
+        }
+    }
+
+    void showBookListWithAttributes() {
+        for (Book book : bookList) {
+            System.out.println(book.getAll());
         }
     }
 }

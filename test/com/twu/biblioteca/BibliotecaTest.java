@@ -28,9 +28,18 @@ public class BibliotecaTest {
     @Test
     public void shouldShowBookList() throws Exception {
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("myBook"));
+        bookList.add(new Book("myBook", "Sli", "2016"));
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList);
         bibliotecaApp.showBookList();
         assertEquals("myBook\n", outputStream.toString());
+    }
+
+    @Test
+    public void shouldShowBookListWithAllAttributes() throws Exception {
+        List<Book> bookList = new ArrayList<>();
+        bookList.add(new Book("myBook", "Sli", "2016"));
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList);
+        bibliotecaApp.showBookListWithAttributes();
+        assertEquals("myBook\tSli\t2016\n", outputStream.toString());
     }
 }
