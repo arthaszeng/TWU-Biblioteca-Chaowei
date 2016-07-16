@@ -23,12 +23,12 @@ class BibliotecaApp {
     }
 
     void showWelcome() {
-        mockedIO.output("Welcome, App stated");
+        mockedIO.output("Welcome, App started");
     }
 
     void listBooks() {
         for (Book book : bookList) {
-            mockedIO.output(book.getAll());
+            mockedIO.output(book.getName());
         }
     }
 
@@ -39,7 +39,9 @@ class BibliotecaApp {
     }
 
     void showOptions() {
-        optionList.forEach(System.out::println);
+        for (String option: optionList) {
+            mockedIO.output(option);
+        }
     }
 
     boolean selectOption(String selectedOption) {
@@ -48,6 +50,8 @@ class BibliotecaApp {
                 listBooksWithAllAttributes();
                 return true;
             default:
+                mockedIO.output("Select a valid option!");
+                showOptions();
                 return false;
         }
     }

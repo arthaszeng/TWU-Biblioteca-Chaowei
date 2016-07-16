@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -36,18 +36,18 @@ public class BibliotecaTest {
     public void shouldShowBookList() throws Exception {
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book("myBook", "Sli", "2016"));
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList);
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), mockedIO);
         bibliotecaApp.listBooks();
-        assertEquals("myBook\n", outputStream.toString());
+        verify(mockedIO, times(1)).output("myBook");
     }
 
     @Test
     public void shouldShowBookListWithAllAttributes() throws Exception {
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book("myBook", "Sli", "2016"));
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList);
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), mockedIO);
         bibliotecaApp.listBooksWithAllAttributes();
-        assertEquals("myBook\tSli\t2016\n", outputStream.toString());
+        verify(mockedIO, times(1)).output("myBook\tSli\t2016");
     }
 
     @Test
@@ -55,9 +55,9 @@ public class BibliotecaTest {
         List<Book> bookList = new ArrayList<>();
         List<String> optionList = new ArrayList<>();
         optionList.add("[LB] List Books");
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList);
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
         bibliotecaApp.showOptions();
-        assertEquals("[LB] List Books\n", outputStream.toString());
+        verify(mockedIO, times(1)).output("[LB] List Books");
     }
 
     @Test
@@ -68,5 +68,17 @@ public class BibliotecaTest {
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
         assertTrue( bibliotecaApp.selectOption("LB"));
         verify(mockedIO, times(1)).output("myBook\tSli\t2016");
+    }
+
+    @Test
+    public void shouldHintWhenSelectAInvalidOption() throws Exception {
+        List<Book> bookList = new ArrayList<>();
+        List<String> optionList = new ArrayList<>();
+        bookList.add(new Book ("myBook", "Sli", "2016"));
+        optionList.add("[LB] List Books");
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
+        assertFalse( bibliotecaApp.selectOption("wrongOption"));
+        verify(mockedIO, times(1)).output("Select a valid option!");
+        verify(mockedIO, times(1)).output("[LB] List Books");
     }
 }
