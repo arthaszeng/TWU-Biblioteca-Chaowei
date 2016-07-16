@@ -6,4 +6,7 @@ public class BibliotecaApp {
         System.out.println("Hello, world!");
     }
 
+    void showWelcome() {
+        System.out.println("Welcome, App started");
+    }
 }
