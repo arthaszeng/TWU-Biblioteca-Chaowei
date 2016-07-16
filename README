@@ -19,7 +19,7 @@ All future options should be added to this menu also.
 As a customer, I would like to be notified when I choose an invalid option with the message
 “Select a valid option!”, so that I can know when I need to re-enter my choice.
 
-Quit -
+\/ Quit -
 As a customer, I would like to continue choosing options until I choose to 'Quit'.
 
 Checkout Book -

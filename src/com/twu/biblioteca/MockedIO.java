@@ -1,12 +1,14 @@
 package com.twu.biblioteca;
 
-public class MockedIO {
+import java.util.Scanner;
+
+class MockedIO {
     void output(String context) {
         System.out.println(context);
     }
 
     String input () {
-        String context = System.in.toString();
-        return context;
+        Scanner scanner = new Scanner(System.in);
+        return scanner.next();
     }
 }

@@ -73,14 +73,28 @@ public class BibliotecaTest {
     public void shouldHintWhenSelectAInvalidOption() throws Exception {
         List<Book> bookList = new ArrayList<>();
         List<String> optionList = new ArrayList<>();
-        bookList.add(new Book ("myBook", "Sli", "2016"));
-        optionList.add("[LB] List Books");
         BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
         when(mockedIO.input()).thenReturn("wrongSelection");
-        assertFalse( bibliotecaApp.selectOption());
+        assertTrue(bibliotecaApp.selectOption());
         verify(mockedIO, times(1)).output("Select a valid option!");
-        verify(mockedIO, times(2)).output("[LB] List Books");
     }
 
+    @Test
+    public void shouldKeepingChooseOptionUntilSelectQuit() throws Exception {
+        List<Book> bookList = new ArrayList<>();
+        List<String> optionList = new ArrayList<>();
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
+//        when(mockedIO.input()).thenReturn("LB");
+//        when(mockedIO.input()).thenReturn("Wrong");
+        when(mockedIO.input()).thenReturn("QUIT");
+        bibliotecaApp.keepCycle();
+//        verify(mockedIO, times(1)).output("Select a valid option!");
+        verify(mockedIO, times(1)).output("Over!");
+    }
 
+    @Test
+    public void testMockedIOCouldMockTerminalInputCorectly() throws Exception {
+        when(mockedIO.input()).thenReturn("right");
+        assertEquals("right", mockedIO.input());
+    }
 }
