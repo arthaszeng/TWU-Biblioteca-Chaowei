@@ -2,10 +2,12 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.matchers.Null;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -199,4 +201,41 @@ public class BibliotecaTest {
         verify(mockedIO, times(1)).output("MV1");
         verify(mockedIO, times(1)).output("MV2");
     }
-}
+
+    @Test
+    public void shouldShowAListOfMoviesWithAttributes() throws Exception {
+        bibliotecaApp.addMovie(new Movie("MV1", "1", "Sli", "10"), bibliotecaApp.movieList);
+        bibliotecaApp.addMovie(new Movie("MV2", "2", "Sli", "1"), bibliotecaApp.movieList);
+
+        bibliotecaApp.listMoviesWithAllAttributes(bibliotecaApp.movieList);
+
+        verify(mockedIO, times(1)).output("MV1\t1\tSli\t10");
+        verify(mockedIO, times(1)).output("MV2\t2\tSli\t1");
+    }
+
+    @Test
+    public void shouldCheckOutAMovieWhenInputIsValid() throws Exception {
+        Movie movie = new Movie("MV1", "1", "Sli", "10");
+        bibliotecaApp.addMovie(movie, bibliotecaApp.movieList);
+
+        when(mockedIO.input()).thenReturn("MV1");
+        boolean checkoutOneMovie = bibliotecaApp.checkoutOneMovie();
+
+
+        assertThat(checkoutOneMovie, is(true));
+        verify(mockedIO, times(1)).output("Thank you! Enjoy the movie.");
+        assertThat(bibliotecaApp.queryOneMovie("MV1", bibliotecaApp.checkedMovieList), is(movie));
+    }
+
+    @Test
+    public void shouldCheckOutAMovieWhenInputIsInvalid() throws Exception {
+        Movie movie = new Movie("MV1", "1", "Sli", "10");
+        bibliotecaApp.addMovie(movie, bibliotecaApp.movieList);
+
+        when(mockedIO.input()).thenReturn("WrongName");
+        boolean checkoutOneMovie = bibliotecaApp.checkoutOneMovie();
+
+        assertThat(checkoutOneMovie, is(Boolean.FALSE));
+        verify(mockedIO, times(1)).output("That movie is not available.");
+        assertThat(bibliotecaApp.queryOneMovie("MV1", bibliotecaApp.checkedMovieList) == null, is(true));
+    }}

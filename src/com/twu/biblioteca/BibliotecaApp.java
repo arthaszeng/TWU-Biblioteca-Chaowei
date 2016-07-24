@@ -1,12 +1,14 @@
 package com.twu.biblioteca;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 class BibliotecaApp {
     List<Book> bookList;
     List<Movie> movieList;
     List<Book> checkedBookList;
-    private List<Movie> checkedMovieList;
+    List<Movie> checkedMovieList;
     private List<String> optionList;
     private MockedIO mockedIO;
 
@@ -158,7 +160,7 @@ class BibliotecaApp {
         }
     }
 
-    private Book queryOneBook(String bookName, List<Book> bookList) {
+    Book queryOneBook(String bookName, List<Book> bookList) {
         for (Book aBook : bookList) {
             if (aBook.getName().equals(bookName)) {
                 return aBook;
@@ -166,4 +168,31 @@ class BibliotecaApp {
         }
         return null;
     }
+
+    boolean checkoutOneMovie() {
+        String inputMovie = mockedIO.input();
+        if (inputMovie.isEmpty()) {
+            mockedIO.output("Invalid input.");
+            return false;
+        } else {
+            for (Movie movie : movieList) {
+                    if (inputMovie.equals(movie.getName()) && movieList.remove(movie) && checkedMovieList.add(movie)) {
+                            mockedIO.output("Thank you! Enjoy the movie.");
+                            return true;
+                }
+            }
+            mockedIO.output("That movie is not available.");
+            return false;
+        }
+    }
+
+    Movie queryOneMovie(String movieName, List<Movie> movieList) {
+        for (Movie movie : movieList) {
+            if (movie.getName().equals(movieName)) {
+                return movie;
+            }
+        }
+        return null;
+    }
+
 }

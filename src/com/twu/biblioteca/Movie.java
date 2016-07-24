@@ -14,12 +14,7 @@ public class Movie {
         this.name = name;
         this.year = year;
         this.director = director;
-
-        if (rating.equals("unrated") || Integer.getInteger(rating, 0) < 1 || Integer.getInteger(rating, 0) > 10) {
-            this.rating = "unrated";
-        } else {
-            this.rating = rating;
-        }
+        this.rating = rating;
     }
 
     String getName() {

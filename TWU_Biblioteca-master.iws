@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b51d4b41-e574-4478-ab54-5249959150bc" name="Default" comment="">
+    <list default="true" id="b51d4b41-e574-4478-ab54-5249959150bc" name="Default" comment="add test for checking out movie when input is invalid">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/MovieTest.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README" afterPath="$PROJECT_DIR$/README" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TWU_Biblioteca-master.iws" afterPath="$PROJECT_DIR$/TWU_Biblioteca-master.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/Movie.java" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/Movie.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/MovieTest.java" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/MovieTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/BibliotecaTest.java" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/BibliotecaTest.java" />
     </list>
     <ignored path="TWU_Biblioteca-master.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,11 +109,12 @@
       <file leaf-file-name="BibliotecaApp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="83" column="39" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="39" />
+            <state relative-caret-position="286">
+              <caret line="183" column="57" selection-start-line="183" selection-start-column="57" selection-end-line="183" selection-end-column="57" />
               <folding>
-                <element signature="e#1180#1181#0" expanded="true" />
-                <element signature="e#1223#1224#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1225#1226#0" expanded="true" />
+                <element signature="e#1268#1269#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -126,11 +130,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BibliotecaTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BibliotecaTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/com/twu/biblioteca/BibliotecaTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="200" column="5" selection-start-line="200" selection-start-column="5" selection-end-line="200" selection-end-column="5" />
+            <state relative-caret-position="652">
+              <caret line="240" column="5" selection-start-line="240" selection-start-column="5" selection-end-line="240" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -138,45 +142,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MovieTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/com/twu/biblioteca/MovieTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="53" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="50" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state relative-caret-position="389">
+              <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="17" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Movie.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/twu/biblioteca/Movie.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-              <folding>
-                <element signature="e#795#796#0" expanded="true" />
-                <element signature="e#822#823#0" expanded="true" />
-                <element signature="e#853#854#0" expanded="true" />
-                <element signature="e#880#881#0" expanded="true" />
-                <element signature="e#915#916#0" expanded="true" />
-                <element signature="e#946#947#0" expanded="true" />
-                <element signature="e#972#973#0" expanded="true" />
-                <element signature="e#1001#1002#0" expanded="true" />
-                <element signature="e#1024#1025#0" expanded="true" />
-                <element signature="e#1099#1100#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -462,12 +433,12 @@
         <option value="$PROJECT_DIR$/test/com/twu/biblioteca/BookTest.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/com/twu/biblioteca/MockedIO.java" />
-        <option value="$PROJECT_DIR$/README" />
-        <option value="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" />
         <option value="$PROJECT_DIR$/src/com/twu/biblioteca/Book.java" />
-        <option value="$PROJECT_DIR$/test/com/twu/biblioteca/BibliotecaTest.java" />
-        <option value="$PROJECT_DIR$/src/com/twu/biblioteca/Movie.java" />
+        <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/test/com/twu/biblioteca/MovieTest.java" />
+        <option value="$PROJECT_DIR$/src/com/twu/biblioteca/Movie.java" />
+        <option value="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" />
+        <option value="$PROJECT_DIR$/test/com/twu/biblioteca/BibliotecaTest.java" />
       </list>
     </option>
   </component>
@@ -625,7 +596,66 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
   </component>
-  <component name="RunManager" selected="TestNG.MovieTest.testMoviesRatingCanNotBiggerThan10">
+  <component name="RunManager" selected="JUnit.BibliotecaTest.shouldCheckOutAMovieWhenInputIsInvalid">
+    <configuration default="false" name="BibliotecaTest.shouldShowAListOfMoviesWithAttributes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.twu.biblioteca.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="TWU_Biblioteca-master" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
+      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.BibliotecaTest" />
+      <option name="METHOD_NAME" value="shouldShowAListOfMoviesWithAttributes" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="MovieTest.testtt" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.twu.biblioteca.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="TWU_Biblioteca-master" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
+      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.MovieTest" />
+      <option name="METHOD_NAME" value="testtt" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
     <configuration default="false" name="BibliotecaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
@@ -652,7 +682,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="BibliotecaTest.shouldKeepCheckedBooksInCheckedBookList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.twu.biblioteca.*" />
@@ -664,7 +694,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.BibliotecaTest" />
-      <option name="METHOD_NAME" value="shouldKeepCheckedBooksInCheckedBookList" />
+      <option name="METHOD_NAME" value="shouldCheckOutAMovieWhenInputIsValid" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
@@ -678,7 +708,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="BibliotecaTest.shouldShowAListOfMovies" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsInvalid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
           <option name="PATTERN" value="com.twu.biblioteca.*" />
@@ -690,7 +720,7 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.BibliotecaTest" />
-      <option name="METHOD_NAME" value="shouldShowAListOfMovies" />
+      <option name="METHOD_NAME" value="shouldCheckOutAMovieWhenInputIsInvalid" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
@@ -702,72 +732,6 @@
       </option>
       <envs />
       <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="MovieTest.testMoviesRatingCanNotLittleThan1" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.twu.biblioteca.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="TWU_Biblioteca-master" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
-      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.MovieTest" />
-      <option name="METHOD_NAME" value="testMoviesRatingCanNotLittleThan1" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="MovieTest.testMoviesRatingCanNotBiggerThan10" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.twu.biblioteca.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="TWU_Biblioteca-master" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
-      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.MovieTest" />
-      <option name="METHOD_NAME" value="testMoviesRatingCanNotBiggerThan10" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
       <method />
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -1167,19 +1131,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.BibliotecaTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.BibliotecaTest.shouldKeepCheckedBooksInCheckedBookList" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.BibliotecaTest.shouldShowAListOfMovies" />
-      <item index="3" class="java.lang.String" itemvalue="TestNG.MovieTest.testMoviesRatingCanNotLittleThan1" />
-      <item index="4" class="java.lang.String" itemvalue="TestNG.MovieTest.testMoviesRatingCanNotBiggerThan10" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.BibliotecaTest.shouldShowAListOfMoviesWithAttributes" />
+      <item index="1" class="java.lang.String" itemvalue="TestNG.MovieTest.testtt" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.BibliotecaTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.BibliotecaTest.shouldCheckOutAMovieWhenInputIsValid" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.BibliotecaTest.shouldCheckOutAMovieWhenInputIsInvalid" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="TestNG.MovieTest.testMoviesRatingCanNotBiggerThan10" />
-        <item index="1" class="java.lang.String" itemvalue="TestNG.MovieTest.testMoviesRatingCanNotLittleThan1" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.BibliotecaTest.shouldShowAListOfMovies" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.BibliotecaTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.BibliotecaTest.shouldKeepCheckedBooksInCheckedBookList" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.BibliotecaTest.shouldCheckOutAMovieWhenInputIsInvalid" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.BibliotecaTest.shouldCheckOutAMovieWhenInputIsValid" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.BibliotecaTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.BibliotecaTest.shouldShowAListOfMoviesWithAttributes" />
+        <item index="4" class="java.lang.String" itemvalue="TestNG.MovieTest.testtt" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1204,7 +1168,7 @@
       <workItem from="1468079322644" duration="1655000" />
       <workItem from="1468654606521" duration="29554000" />
       <workItem from="1469174581435" duration="1006000" />
-      <workItem from="1469349677172" duration="12098000" />
+      <workItem from="1469349677172" duration="16268000" />
     </task>
     <task id="LOCAL-00001" summary="add showWelcome method">
       <created>1468655010568</created>
@@ -1304,43 +1268,50 @@
       <option name="project" value="LOCAL" />
       <updated>1469364108831</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add test for movie's rating value, it should between 1 to 10">
+      <created>1469365762519</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1469365762519</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BibliotecaTest - 2016.07.24 at 19h 58m 25s.xml">
+    <history-entry file="BibliotecaTest - 2016.07.24 at 22h 09m 13s.xml">
       <configuration name="BibliotecaTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BibliotecaTest - 2016.07.24 at 19h 59m 30s.xml">
-      <configuration name="BibliotecaTest" configurationId="JUnit" />
+    <history-entry file="BibliotecaTest_shouldCheckOutAMovieWhenInputIsInvalid - 2016.07.24 at 22h 22m 02s.xml">
+      <configuration name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsInvalid" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BibliotecaTest - 2016.07.24 at 20h 40m 56s.xml">
-      <configuration name="BibliotecaTest" configurationId="JUnit" />
+    <history-entry file="BibliotecaTest_shouldCheckOutAMovieWhenInputIsInvalid - 2016.07.24 at 22h 22m 16s.xml">
+      <configuration name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsInvalid" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="BibliotecaTest_shouldShowAListOfMovies - 2016.07.24 at 20h 40m 59s.xml">
-      <configuration name="BibliotecaTest.shouldShowAListOfMovies" configurationId="JUnit" />
+    <history-entry file="BibliotecaTest_shouldCheckOutAMovieWhenInputIsValid - 2016.07.24 at 22h 09m 19s.xml">
+      <configuration name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsValid" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MovieTest_testMoviesRatingCanNotBiggerThan10 - 2016.07.24 at 21h 08m 20s.xml">
-      <configuration name="MovieTest.testMoviesRatingCanNotBiggerThan10" configurationId="TestNG" />
+    <history-entry file="BibliotecaTest_shouldCheckOutAMovieWhenInputIsValid - 2016.07.24 at 22h 09m 49s.xml">
+      <configuration name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsValid" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MovieTest_testMoviesRatingCanNotBiggerThan10 - 2016.07.24 at 21h 08m 22s.xml">
-      <configuration name="MovieTest.testMoviesRatingCanNotBiggerThan10" configurationId="TestNG" />
+    <history-entry file="BibliotecaTest_shouldCheckOutAMovieWhenInputIsValid - 2016.07.24 at 22h 10m 32s.xml">
+      <configuration name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsValid" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MovieTest_testMoviesRatingCanNotLittleThan1 - 2016.07.24 at 20h 45m 15s.xml">
-      <configuration name="MovieTest.testMoviesRatingCanNotLittleThan1" configurationId="TestNG" />
+    <history-entry file="BibliotecaTest_shouldCheckOutAMovieWhenInputIsValid - 2016.07.24 at 22h 10m 42s.xml">
+      <configuration name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsValid" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MovieTest_testMoviesRatingCanNotLittleThan1 - 2016.07.24 at 20h 48m 24s.xml">
-      <configuration name="MovieTest.testMoviesRatingCanNotLittleThan1" configurationId="TestNG" />
+    <history-entry file="BibliotecaTest_shouldCheckOutAMovieWhenInputIsValid - 2016.07.24 at 22h 11m 09s.xml">
+      <configuration name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsValid" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MovieTest_testMoviesRatingCanNotLittleThan1 - 2016.07.24 at 21h 06m 14s.xml">
-      <configuration name="MovieTest.testMoviesRatingCanNotLittleThan1" configurationId="TestNG" />
+    <history-entry file="BibliotecaTest_shouldCheckOutAMovieWhenInputIsValid - 2016.07.24 at 22h 14m 42s.xml">
+      <configuration name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsValid" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MovieTest_testMoviesRatingCanNotLittleThan1 - 2016.07.24 at 21h 06m 47s.xml">
-      <configuration name="MovieTest.testMoviesRatingCanNotLittleThan1" configurationId="TestNG" />
+    <history-entry file="BibliotecaTest_shouldCheckOutAMovieWhenInputIsValid - 2016.07.24 at 22h 14m 46s.xml">
+      <configuration name="BibliotecaTest.shouldCheckOutAMovieWhenInputIsValid" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44341000" />
+    <option name="totallyTimeSpent" value="48511000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1363,7 +1334,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22038217" sideWeight="0.5028694" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998565" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22038217" sideWeight="0.49713057" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22038217" sideWeight="0.49713057" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1409,7 +1380,9 @@
     <MESSAGE value="Add prompt message when return book is valid wor invalid." />
     <MESSAGE value="Refactor BibliotecaTest, add declare into setup from each test" />
     <MESSAGE value="add Movie class, add test for showing list of movies" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Movie class, add test for showing list of movies" />
+    <MESSAGE value="add test for movie's rating value, it should between 1 to 10" />
+    <MESSAGE value="add test for checking out movie when input is invalid" />
+    <option name="LAST_COMMIT_MESSAGE" value="add test for checking out movie when input is invalid" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1426,8 +1399,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1180#1181#0" expanded="true" />
-            <element signature="e#1223#1224#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1268#1269#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1479,8 +1453,9 @@
         <state relative-caret-position="1530">
           <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
           <folding>
-            <element signature="e#1180#1181#0" expanded="true" />
-            <element signature="e#1223#1224#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1268#1269#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1524,8 +1499,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1180#1181#0" expanded="true" />
-            <element signature="e#1223#1224#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1268#1269#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1571,17 +1547,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="83" column="39" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="39" />
-          <folding>
-            <element signature="e#1180#1181#0" expanded="true" />
-            <element signature="e#1223#1224#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/twu/biblioteca/Book.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -1590,50 +1555,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/com/twu/biblioteca/BibliotecaTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="200" column="5" selection-start-line="200" selection-start-column="5" selection-end-line="200" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/com/twu/biblioteca/MovieTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="53" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/twu/biblioteca/Movie.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        <state relative-caret-position="272">
+          <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
           <folding>
-            <element signature="e#795#796#0" expanded="true" />
-            <element signature="e#822#823#0" expanded="true" />
-            <element signature="e#853#854#0" expanded="true" />
-            <element signature="e#880#881#0" expanded="true" />
+            <element signature="e#611#612#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
+            <element signature="e#669#670#0" expanded="true" />
+            <element signature="e#696#697#0" expanded="true" />
+            <element signature="e#731#732#0" expanded="true" />
+            <element signature="e#762#763#0" expanded="true" />
+            <element signature="e#788#789#0" expanded="true" />
+            <element signature="e#817#818#0" expanded="true" />
+            <element signature="e#840#841#0" expanded="true" />
             <element signature="e#915#916#0" expanded="true" />
-            <element signature="e#946#947#0" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
-            <element signature="e#1001#1002#0" expanded="true" />
-            <element signature="e#1024#1025#0" expanded="true" />
-            <element signature="e#1099#1100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="183" column="57" selection-start-line="183" selection-start-column="57" selection-end-line="183" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1268#1269#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="50" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+        <state relative-caret-position="389">
+          <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/com/twu/biblioteca/BibliotecaTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="652">
+          <caret line="240" column="5" selection-start-line="240" selection-start-column="5" selection-end-line="240" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
