@@ -140,26 +140,31 @@ class BibliotecaApp {
         return false;
     }
 
-    boolean returnBook() {
+    boolean returnBook(String whichResource) {
+        List<Resource> resources = whichResource.toUpperCase().equals("BOOK") ? bookList : movieList;
+        List<Resource> checkedResources = whichResource.toUpperCase().equals("MOVIE") ? checkedMovieList : checkedBookList;
+
+
         String inputOfName = mockedIO.input();
         if (inputOfName.isEmpty()) {
 //            mockedIO.output("error input");
             return false;
         } else {
-            Book queriedBook = (Book) queryResource(inputOfName, checkedBookList);
-            if (queriedBook == null) {
-                mockedIO.output("That is not a valid book to return.");
+            Resource queryOneResource = queryOneResource(inputOfName, checkedResources);
+            if (queryOneResource == null) {
+                mockedIO.output("That is not a valid " + whichResource.toLowerCase() + " to return.");
                 return false;
             } else {
-                checkedBookList.remove(queriedBook);
-                bookList.add(queriedBook);
-                mockedIO.output("Thank you for returning the book.");
-                return true;
+                if (checkedResources.remove(queryOneResource) && resources.add(queryOneResource)) {
+                    mockedIO.output("Thank you for returning the " + whichResource.toLowerCase() + ".");
+                    return true;
+                } else
+                    return false;
             }
         }
     }
 
-    Resource queryResource(String resourceName, List<Resource> resources) {
+    Resource queryOneResource(String resourceName, List<Resource> resources) {
         for (Resource resource : resources) {
             if (resource.getName().equals(resourceName)) {
                 return resource;
