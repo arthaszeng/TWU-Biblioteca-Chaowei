@@ -11,7 +11,8 @@ class BibliotecaApp {
     List<Resource> checkedMovieList;
     private List<String> optionList;
     private MockedIO mockedIO;
-    private CustomerDataManagement customerDataManagement;
+    CustomerDataManagement customerDataManagement;
+    private User currentUser = null;
 
     BibliotecaApp(List<Resource> bookList,
                   List<Resource> movieList,
@@ -111,19 +112,27 @@ class BibliotecaApp {
         List<Resource> checkedResources = whichResource.toUpperCase().equals("BOOK") ? checkedBookList : checkedMovieList;
         String InputResourceName = mockedIO.input();
 
-        if (resources.isEmpty()) {
+        if (resources.isEmpty() || !verifyUser()) {
             return false;
         }
 
         for (Resource resource : resources) {
-            if (resource.getName().equals (InputResourceName) && resources.remove(resource) && checkedResources.add(resource)) {
-                    mockedIO.output("Thank you! Enjoy the " + whichResource.toLowerCase() + ".");
-                    return true;
+            if (resource.getName().equals (InputResourceName)) {
+                resources.remove(resource);
+                resource.updateHolder(getCurrentUser().getLibraryNumber());
+                checkedResources.add(resource);
+
+                mockedIO.output("Thank you! Enjoy the " + whichResource.toLowerCase() + ".");
+                return true;
             }
         }
 
         mockedIO.output("That " + whichResource.toLowerCase() + " is not available.");
         return false;
+    }
+
+    private boolean verifyUser() {
+        return currentUser != null;
     }
 
     Resource queryOneResource(String resourceName, List<Resource> resources) {
@@ -139,22 +148,21 @@ class BibliotecaApp {
         List<Resource> resources = whichResource.toUpperCase().equals("BOOK") ? bookList : movieList;
         List<Resource> checkedResources = whichResource.toUpperCase().equals("MOVIE") ? checkedMovieList : checkedBookList;
 
-
         String inputOfName = mockedIO.input();
-        if (inputOfName.isEmpty()) {
+        if (inputOfName.isEmpty() || !verifyUser()) {
 //            mockedIO.output("error input");
             return false;
         } else {
-            Resource queryOneResource = queryOneResource(inputOfName, checkedResources);
-            if (queryOneResource == null) {
+            Resource queriedOneResource = queryOneResource(inputOfName, checkedResources);
+            if (queriedOneResource == null) {
                 mockedIO.output("That is not a valid " + whichResource.toLowerCase() + " to return.");
                 return false;
             } else {
-                if (checkedResources.remove(queryOneResource) && resources.add(queryOneResource)) {
+                checkedResources.remove(queriedOneResource);
+                queriedOneResource.updateHolder("PLACEHOLDER");
+                resources.add(queriedOneResource);
                     mockedIO.output("Thank you for returning the " + whichResource.toLowerCase() + ".");
                     return true;
-                } else
-                    return false;
             }
         }
     }
@@ -165,9 +173,12 @@ class BibliotecaApp {
         mockedIO.output("Please input your password:");
         String password = mockedIO.input();
 
-        User user = customerDataManagement.login(account, password);
-        return user != null;
+        currentUser = customerDataManagement.login(account, password);
+
+        return currentUser != null;
     }
 
-
+    User getCurrentUser() {
+        return currentUser;
+    }
 }

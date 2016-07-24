@@ -252,7 +252,26 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldVerifyUserBeforeCheckingOutBook() throws Exception {
+    public void shouldKeepUserInformationInWhenUserLoginSuccessful() throws Exception {
+        when(mockedIO.input()).thenReturn("123-4567","admin");
+        bibliotecaApp.login();
+
+        assertThat(bibliotecaApp.getCurrentUser().getLibraryNumber(), is("123-4567"));
+    }
+
+    @Test
+    public void shouldRemoteLibraryNumberToCheckedOutResource() throws Exception {
+        bibliotecaApp.addResource(new Book("myBook", "Author", "1999"), bibliotecaApp.bookList);
+
+        when(mockedIO.input()).thenReturn("123-4567", "admin", "myBook");
+        bibliotecaApp.login();
+        bibliotecaApp.checkoutOneResource("book");
+
+        assertThat(bibliotecaApp.checkedBookList.get(0).getHolder(), is("123-4567"));
+    }
+
+    @Test
+    public void shouldNotCheckOutAnyResourceWhenLoginFailedOrHaveNotLogin() throws Exception {
 
     }
 }

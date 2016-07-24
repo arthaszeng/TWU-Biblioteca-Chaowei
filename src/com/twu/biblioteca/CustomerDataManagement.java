@@ -11,7 +11,7 @@ class CustomerDataManagement {
 
     User login(String account, String password) {
         for (User user : userList) {
-            if (user.getAccount().equals(account) && user.getPassword().equals(password)) {
+            if (user.getLibraryNumber().equals(account) && user.getPassword().equals(password)) {
                 return user;
             }
         }
