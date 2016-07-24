@@ -1,12 +1,13 @@
 package com.twu.biblioteca;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 class BibliotecaApp {
     List<Book> bookList;
-    List<Book> checkBookList;
+    List<Book> checkedBookList;
     private List<String> optionList;
     private MockedIO mockedIO;
 
@@ -19,7 +20,7 @@ class BibliotecaApp {
 
     BibliotecaApp(List<Book> bookList, List<Book> checkedBookList, List<String> optionList, MockedIO mockedIO) {
         this.bookList = bookList;
-        this.checkBookList = checkedBookList;
+        this.checkedBookList = checkedBookList;
         this.optionList = optionList;
         this.mockedIO = mockedIO;
     }
@@ -69,18 +70,6 @@ class BibliotecaApp {
         }
     }
 
-    public static void main(String args[]) {
-        List<Book> bookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        bookList.add(new Book("myBook", "Sli", "2016"));
-        optionList.add("[LB] List Book");
-        optionList.add("[QUIT] Quit Program");
-
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(bookList, optionList, new MockedIO());
-        bibliotecaApp.showWelcome();
-        bibliotecaApp.keepCycle();
-    }
-
     boolean checkoutOneBook() {
         String inputOfBookName = mockedIO.input();
         if (bookList.isEmpty()) {
@@ -89,7 +78,7 @@ class BibliotecaApp {
             for (Book book : bookList) {
                 if (book.getName().equals(inputOfBookName)) {
                     bookList.remove(book);
-                    checkBookList.add(book);
+                    checkedBookList.add(book);
                     mockedIO.output("Thank you! Enjoy the book");
                     return true;
                 }
@@ -97,5 +86,33 @@ class BibliotecaApp {
             mockedIO.output("That book is not available");
             return false;
         }
+    }
+
+    boolean returnBook() {
+        String inputedBookName = mockedIO.input();
+        if (inputedBookName.isEmpty()) {
+//            mockedIO.output("error input");
+            return false;
+        } else {
+            Book queriedBook = queryOneBook(inputedBookName, checkedBookList);
+            if (queriedBook == null) {
+                mockedIO.output("That is not a valid book to return.");
+                return false;
+            } else {
+                checkedBookList.remove(queriedBook);
+                bookList.add(queriedBook);
+                mockedIO.output("Thank you for returning the book.");
+                return true;
+            }
+        }
+    }
+
+    private Book queryOneBook(String bookName, List<Book> bookList) {
+        for (Book aBook : bookList) {
+            if (aBook.getName().equals(bookName)) {
+                return aBook;
+            }
+        }
+        return null;
     }
 }

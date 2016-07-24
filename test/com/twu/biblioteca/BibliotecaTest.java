@@ -10,11 +10,12 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import static sun.nio.cs.Surrogate.is;
 
 
 public class BibliotecaTest {
-    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private MockedIO mockedIO = mock(MockedIO.class);
+    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     @Before
     public void setUp() throws Exception {
@@ -149,7 +150,7 @@ public class BibliotecaTest {
 
         when(mockedIO.input()).thenReturn("myBook");
         boolean checkOutResult = bibliotecaApp.checkoutOneBook();
-        bibliotecaApp.listBooks(bibliotecaApp.checkBookList);
+        bibliotecaApp.listBooks(bibliotecaApp.checkedBookList);
 
         assertTrue(checkOutResult);
         verify(mockedIO, times(1)).output("myBook");
@@ -185,5 +186,57 @@ public class BibliotecaTest {
 
         assertFalse(checkOutResult);
         verify(mockedIO, times(1)).output("That book is not available");
+    }
+
+    @Test
+    public void shouldAddReturnedBookInBookListAndRemoveFromCheckedBookListWhenBookExistInCheckedBookList() throws Exception {
+        List<Book> bookList = new ArrayList<>();
+        List<Book> checkedBookList = new ArrayList<>();
+        List<String> optionList = new ArrayList<>();
+
+        Book bookInList = new Book("BookInList", "author", "1");
+        Book bookInCheckedList = new Book("BookInList", "author", "1");
+
+        bookList.add(bookInList);
+        checkedBookList.add(bookInCheckedList);
+
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, checkedBookList, optionList, mockedIO);
+
+        when(mockedIO.input()).thenReturn("BookInList");
+        assertTrue(bibliotecaApp.returnBook());
+        assertTrue(bibliotecaApp.bookList.contains(bookInCheckedList));
+        assertFalse(bibliotecaApp.checkedBookList.contains(bookInCheckedList));
+    }
+
+    @Test
+    public void shouldDisableSuccessfulMessageWhenBookIsValid() throws Exception {
+        List<Book> bookList = new ArrayList<>();
+        List<Book> checkedBookList = new ArrayList<>();
+        List<String> optionList = new ArrayList<>();
+
+        Book bookInCheckedList = new Book("BookInList", "author", "1");
+        checkedBookList.add(bookInCheckedList);
+
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, checkedBookList, optionList, mockedIO);
+
+        when(mockedIO.input()).thenReturn("BookInList");
+        assertTrue(bibliotecaApp.returnBook());
+
+        verify(mockedIO, times(1)).output("Thank you for returning the book.");
+    }
+
+
+    @Test
+    public void shouldDisableFailMessageWhenBookIsInvalid() throws Exception {
+        List<Book> bookList = new ArrayList<>();
+        List<Book> checkedBookList = new ArrayList<>();
+        List<String> optionList = new ArrayList<>();
+
+        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, checkedBookList, optionList, mockedIO);
+
+        when(mockedIO.input()).thenReturn("wrongName");
+        assertFalse(bibliotecaApp.returnBook());
+
+        verify(mockedIO, times(1)).output("That is not a valid book to return.");
     }
 }
