@@ -6,7 +6,8 @@ class CustomerDataManagement {
     private List<User> userList = new ArrayList<>();
 
     CustomerDataManagement() {
-        userList.add(new User("admin", "123-4567", "admin", new ArrayList<>(), new ArrayList<>()));
+        userList.add(new User("admin", "email", "phone","123-4567", "admin"));
+        userList.add(new User("test", "test", "test", "test", "test"));
     }
 
     User login(String account, String password) {

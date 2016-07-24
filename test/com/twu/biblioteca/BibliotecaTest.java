@@ -25,6 +25,8 @@ public class BibliotecaTest {
         List<Resource> checkedMovieList = new ArrayList<>();
         List<String> optionList = new ArrayList<>();
         bibliotecaApp = new BibliotecaApp(bookList, movieList, checkedBookList, checkedMovieList, optionList, mockedIO, customerDataManagement);
+        when(mockedIO.input()).thenReturn("test", "test");
+        bibliotecaApp.login();
     }
 
     @Test
@@ -265,13 +267,28 @@ public class BibliotecaTest {
 
         when(mockedIO.input()).thenReturn("123-4567", "admin", "myBook");
         bibliotecaApp.login();
-        bibliotecaApp.checkoutOneResource("book");
+        boolean checkOutResult = bibliotecaApp.checkoutOneResource("book");
 
+        assertThat(checkOutResult, is(true));
         assertThat(bibliotecaApp.checkedBookList.get(0).getHolder(), is("123-4567"));
     }
 
     @Test
     public void shouldNotCheckOutAnyResourceWhenLoginFailedOrHaveNotLogin() throws Exception {
+        bibliotecaApp.logOut();
+        bibliotecaApp.addResource(new Book("myBook", "Author", "1999"), bibliotecaApp.bookList);
 
+        when(mockedIO.input()).thenReturn("myBook");
+        boolean checkOutResult = bibliotecaApp.checkoutOneResource("book");
+
+        assertThat(checkOutResult, is(false));
+    }
+
+    @Test
+    public void shouldShowUsersInformationWhenLoginSuccessful() throws Exception {
+        boolean showProfileResult = bibliotecaApp.showProfile();
+
+        assertThat(showProfileResult, is(true));
+        verify(mockedIO, times(1)).output("test\ttest\ttest");
     }
 }

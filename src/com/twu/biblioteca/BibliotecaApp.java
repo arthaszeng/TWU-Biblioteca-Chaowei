@@ -181,4 +181,16 @@ class BibliotecaApp {
     User getCurrentUser() {
         return currentUser;
     }
+
+    void logOut() {
+        currentUser = null;
+    }
+
+    boolean showProfile() {
+        if (verifyUser()) {
+            mockedIO.output(currentUser.showProfile());
+            return true;
+        } else
+            return false;
+    }
 }
