@@ -16,6 +16,7 @@ import static org.mockito.Mockito.*;
 public class BibliotecaTest {
     private BibliotecaApp bibliotecaApp;
     private MockedIO mockedIO = mock(MockedIO.class);
+    private CustomerDataManagement customerDataManagement = new CustomerDataManagement();
 
     @Before
     public void setUp() throws Exception {
@@ -24,7 +25,7 @@ public class BibliotecaTest {
         List<Movie> movieList = new ArrayList<>();
         List<Movie> checkedMovieList = new ArrayList<>();
         List<String> optionList = new ArrayList<>();
-        bibliotecaApp = new BibliotecaApp(bookList, movieList, checkedBookList, checkedMovieList, optionList, mockedIO);
+        bibliotecaApp = new BibliotecaApp(bookList, movieList, checkedBookList, checkedMovieList, optionList, mockedIO, customerDataManagement);
     }
 
     @Test
@@ -238,4 +239,20 @@ public class BibliotecaTest {
         assertThat(checkoutOneMovie, is(Boolean.FALSE));
         verify(mockedIO, times(1)).output("That movie is not available.");
         assertThat(bibliotecaApp.queryOneMovie("MV1", bibliotecaApp.checkedMovieList) == null, is(true));
-    }}
+    }
+
+//    User Accounts - Login -
+//    As a librarian, I want to know who has checked out a book, so that I can hold them accountable for returning it.
+//    Users must now login using their library number (which is in the format xxx-xxxx) and a password in order to
+//    check-out and return books. User credentials are predefined, so registering new users is not part of this story.
+
+
+    @Test
+    public void shouldLoginSuccessfulWhenUseValidLibraryNumberAndPassword() throws Exception {
+        when(mockedIO.input()).thenReturn("123-4567","admin");
+
+        boolean loginResult = bibliotecaApp.login();
+
+        assertThat(loginResult, is(true));
+    }
+}

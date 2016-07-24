@@ -11,14 +11,22 @@ class BibliotecaApp {
     List<Movie> checkedMovieList;
     private List<String> optionList;
     private MockedIO mockedIO;
+    private CustomerDataManagement customerDataManagement;
 
-    BibliotecaApp(List<Book> bookList, List<Movie> movieList, List<Book> checkedBookList, List<Movie> checkedMovieList, List<String> optionList, MockedIO mockedIO) {
+    BibliotecaApp(List<Book> bookList,
+                  List<Movie> movieList,
+                  List<Book> checkedBookList,
+                  List<Movie> checkedMovieList,
+                  List<String> optionList,
+                  MockedIO mockedIO,
+                  CustomerDataManagement customerDataManagement) {
         this.bookList = bookList;
         this.movieList = movieList;
         this.checkedBookList = checkedBookList;
         this.checkedMovieList = checkedMovieList;
         this.optionList = optionList;
         this.mockedIO = mockedIO;
+        this.customerDataManagement = customerDataManagement;
     }
 
     void showWelcome() {
@@ -195,4 +203,12 @@ class BibliotecaApp {
         return null;
     }
 
+    boolean login() {
+        mockedIO.output("Please input your account:");
+        String account = mockedIO.input();
+        mockedIO.output("Please input your password:");
+        String password = mockedIO.input();
+
+        return customerDataManagement.login(account, password);
+    }
 }
