@@ -162,7 +162,7 @@ public class BibliotecaTest {
         bibliotecaApp.addResource(bookInCheckedList, bibliotecaApp.checkedBookList);
 
         when(mockedIO.input()).thenReturn("BookInList");
-        assertTrue(bibliotecaApp.returnBook("book"));
+        assertTrue(bibliotecaApp.returnOneResource("book"));
         assertTrue(bibliotecaApp.bookList.contains(bookInCheckedList));
         assertFalse(bibliotecaApp.checkedBookList.contains(bookInCheckedList));
     }
@@ -173,7 +173,7 @@ public class BibliotecaTest {
         bibliotecaApp.addResource(bookInCheckedList, bibliotecaApp.checkedBookList);
 
         when(mockedIO.input()).thenReturn("BookInList");
-        assertTrue(bibliotecaApp.returnBook("book"));
+        assertTrue(bibliotecaApp.returnOneResource("book"));
 
         verify(mockedIO, times(1)).output("Thank you for returning the book.");
     }
@@ -182,7 +182,7 @@ public class BibliotecaTest {
     @Test
     public void shouldDisableFailMessageWhenBookIsInvalid() throws Exception {
         when(mockedIO.input()).thenReturn("wrongName");
-        assertFalse(bibliotecaApp.returnBook("book"));
+        assertFalse(bibliotecaApp.returnOneResource("book"));
 
         verify(mockedIO, times(1)).output("That is not a valid book to return.");
     }

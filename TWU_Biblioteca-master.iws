@@ -107,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="550">
-              <caret line="153" column="43" selection-start-line="153" selection-start-column="43" selection-end-line="153" selection-end-column="43" />
+              <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1326#1327#0" expanded="true" />
@@ -136,7 +136,7 @@
         <entry file="file://$PROJECT_DIR$/test/com/twu/biblioteca/BibliotecaTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
-              <caret line="184" column="50" selection-start-line="184" selection-start-column="50" selection-end-line="184" selection-end-column="50" />
+              <caret line="184" column="57" selection-start-line="184" selection-start-column="57" selection-end-line="184" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1228,7 +1228,7 @@
       <workItem from="1468079322644" duration="1655000" />
       <workItem from="1468654606521" duration="29554000" />
       <workItem from="1469174581435" duration="1006000" />
-      <workItem from="1469349677172" duration="25267000" />
+      <workItem from="1469349677172" duration="25537000" />
     </task>
     <task id="LOCAL-00001" summary="add showWelcome method">
       <created>1468655010568</created>
@@ -1405,13 +1405,17 @@
       <option name="project" value="LOCAL" />
       <updated>1469378171393</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="refactor : return one resource">
+      <created>1469379257298</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1469379257298</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="BibliotecaTest - 2016.07.25 at 00h 21m 48s.xml">
-      <configuration name="BibliotecaTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="BibliotecaTest - 2016.07.25 at 00h 22m 25s.xml">
       <configuration name="BibliotecaTest" configurationId="JUnit" />
     </history-entry>
@@ -1439,9 +1443,12 @@
     <history-entry file="BibliotecaTest - 2016.07.25 at 00h 51m 54s.xml">
       <configuration name="BibliotecaTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="BibliotecaTest - 2016.07.25 at 00h 57m 35s.xml">
+      <configuration name="BibliotecaTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57510000" />
+    <option name="totallyTimeSpent" value="57780000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1518,7 +1525,8 @@
     <MESSAGE value="refactor: change methods parameters to Resource.class" />
     <MESSAGE value="merge : check out one book &amp; check out one movie" />
     <MESSAGE value="refactor : queryResource" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor : queryResource" />
+    <MESSAGE value="refactor : return one resource" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor : return one resource" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1768,7 +1776,7 @@
     <entry file="file://$PROJECT_DIR$/test/com/twu/biblioteca/BibliotecaTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="184" column="50" selection-start-line="184" selection-start-column="50" selection-end-line="184" selection-end-column="50" />
+          <caret line="184" column="57" selection-start-line="184" selection-start-column="57" selection-end-line="184" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1778,7 +1786,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
-          <caret line="153" column="43" selection-start-line="153" selection-start-column="43" selection-end-line="153" selection-end-column="43" />
+          <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1326#1327#0" expanded="true" />

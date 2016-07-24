@@ -107,23 +107,9 @@ class BibliotecaApp {
     }
 
     boolean checkoutOneResource(String whichResource) {
-        List<Resource> resources;
-        List<Resource> checkedResources;
+        List<Resource> resources = whichResource.toUpperCase().equals("BOOK") ? bookList : movieList;
+        List<Resource> checkedResources = whichResource.toUpperCase().equals("BOOK") ? checkedBookList : checkedMovieList;
         String InputResourceName = mockedIO.input();
-
-        switch (whichResource.toUpperCase()) {
-            case "BOOK":
-                resources = bookList;
-                checkedResources = checkedBookList;
-                break;
-            case "MOVIE":
-                resources = movieList;
-                checkedResources = checkedMovieList;
-                break;
-            default:
-                resources = new ArrayList<>();
-                checkedResources = new ArrayList<>();
-        }
 
         if (resources.isEmpty()) {
             return false;
@@ -140,7 +126,16 @@ class BibliotecaApp {
         return false;
     }
 
-    boolean returnBook(String whichResource) {
+    Resource queryOneResource(String resourceName, List<Resource> resources) {
+        for (Resource resource : resources) {
+            if (resource.getName().equals(resourceName)) {
+                return resource;
+            }
+        }
+        return null;
+    }
+
+    boolean returnOneResource(String whichResource) {
         List<Resource> resources = whichResource.toUpperCase().equals("BOOK") ? bookList : movieList;
         List<Resource> checkedResources = whichResource.toUpperCase().equals("MOVIE") ? checkedMovieList : checkedBookList;
 
@@ -162,15 +157,6 @@ class BibliotecaApp {
                     return false;
             }
         }
-    }
-
-    Resource queryOneResource(String resourceName, List<Resource> resources) {
-        for (Resource resource : resources) {
-            if (resource.getName().equals(resourceName)) {
-                return resource;
-            }
-        }
-        return null;
     }
 
     boolean login() {
