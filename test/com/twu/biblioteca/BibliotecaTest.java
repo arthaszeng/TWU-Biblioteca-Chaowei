@@ -224,7 +224,7 @@ public class BibliotecaTest {
 
         assertThat(checkoutOneMovie, is(true));
         verify(mockedIO, times(1)).output("Thank you! Enjoy the movie.");
-        assertThat(bibliotecaApp.queryOneMovie("MV1", bibliotecaApp.checkedMovieList), is(movie));
+        assertThat(bibliotecaApp.queryResource("MV1", bibliotecaApp.checkedMovieList), is(movie));
     }
 
     @Test
@@ -237,7 +237,7 @@ public class BibliotecaTest {
 
         assertThat(checkoutOneMovie, is(Boolean.FALSE));
         verify(mockedIO, times(1)).output("That movie is not available.");
-        assertThat(bibliotecaApp.queryOneMovie("MV1", bibliotecaApp.checkedMovieList) == null, is(true));
+        assertThat(bibliotecaApp.queryResource("MV1", bibliotecaApp.checkedMovieList) == null, is(true));
     }
 
 //    User Accounts - Login -

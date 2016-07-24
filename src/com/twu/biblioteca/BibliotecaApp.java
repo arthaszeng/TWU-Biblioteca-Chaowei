@@ -110,6 +110,7 @@ class BibliotecaApp {
         List<Resource> resources;
         List<Resource> checkedResources;
         String InputResourceName = mockedIO.input();
+
         switch (whichResource.toUpperCase()) {
             case "BOOK":
                 resources = bookList;
@@ -126,27 +127,26 @@ class BibliotecaApp {
 
         if (resources.isEmpty()) {
             return false;
-        } else {
-            for (Resource resource : resources) {
-                if (resource.getName().equals(InputResourceName)) {
-                    resources.remove(resource);
-                    checkedResources.add(resource);
-                    mockedIO.output("Thank you! Enjoy the " +whichResource.toLowerCase() + ".");
-                    return true;
-                }
-            }
-            mockedIO.output("That " + whichResource.toLowerCase() + " is not available.");
-            return false;
         }
+
+        for (Resource resource : resources) {
+            if (resource.getName().equals (InputResourceName) && resources.remove(resource) && checkedResources.add(resource)) {
+                    mockedIO.output("Thank you! Enjoy the " + whichResource.toLowerCase() + ".");
+                    return true;
+            }
+        }
+
+        mockedIO.output("That " + whichResource.toLowerCase() + " is not available.");
+        return false;
     }
 
     boolean returnBook() {
-        String inputedBookName = mockedIO.input();
-        if (inputedBookName.isEmpty()) {
+        String inputOfName = mockedIO.input();
+        if (inputOfName.isEmpty()) {
 //            mockedIO.output("error input");
             return false;
         } else {
-            Book queriedBook = queryOneBook(inputedBookName, checkedBookList);
+            Book queriedBook = (Book) queryResource(inputOfName, checkedBookList);
             if (queriedBook == null) {
                 mockedIO.output("That is not a valid book to return.");
                 return false;
@@ -159,21 +159,10 @@ class BibliotecaApp {
         }
     }
 
-    private Book queryOneBook(String bookName, List<Resource> bookList) {
-        for (Resource aBook : bookList) {
-            if (aBook.getName().equals(bookName)) {
-                return (Book) aBook;
-            }
-        }
-        return null;
-    }
-
-
-
-    Resource queryOneMovie(String movieName, List<Resource> movieList) {
-        for (Resource movie : movieList) {
-            if (movie.getName().equals(movieName)) {
-                return movie;
+    Resource queryResource(String resourceName, List<Resource> resources) {
+        for (Resource resource : resources) {
+            if (resource.getName().equals(resourceName)) {
+                return resource;
             }
         }
         return null;
