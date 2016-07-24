@@ -113,7 +113,7 @@ public class BibliotecaTest {
 
         bibliotecaApp.listRepository(bibliotecaApp.bookList);
         when(mockedIO.input()).thenReturn("myBook");
-        assertTrue(bibliotecaApp.checkoutOneBook());
+        assertTrue(bibliotecaApp.checkoutOneResource("Book"));
         bibliotecaApp.listRepository(bibliotecaApp.bookList);
 
         verify(mockedIO, times(1)).output("myBook");
@@ -124,7 +124,7 @@ public class BibliotecaTest {
         bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("myBook");
-        boolean checkOutResult = bibliotecaApp.checkoutOneBook();
+        boolean checkOutResult = bibliotecaApp.checkoutOneResource("Book");
         bibliotecaApp.listRepository(bibliotecaApp.checkedBookList);
 
         assertTrue(checkOutResult);
@@ -136,10 +136,10 @@ public class BibliotecaTest {
         bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("myBook");
-        boolean checkOutResult = bibliotecaApp.checkoutOneBook();
+        boolean checkOutResult = bibliotecaApp.checkoutOneResource("Book");
 
         assertTrue(checkOutResult);
-        verify(mockedIO, times(1)).output("Thank you! Enjoy the book");
+        verify(mockedIO, times(1)).output("Thank you! Enjoy the book.");
     }
 
     @Test
@@ -147,10 +147,10 @@ public class BibliotecaTest {
         bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("wrongName");
-        boolean checkOutResult = bibliotecaApp.checkoutOneBook();
+        boolean checkOutResult = bibliotecaApp.checkoutOneResource("Book");
 
         assertFalse(checkOutResult);
-        verify(mockedIO, times(1)).output("That book is not available");
+        verify(mockedIO, times(1)).output("That book is not available.");
     }
 
     @Test
@@ -219,7 +219,7 @@ public class BibliotecaTest {
         bibliotecaApp.addResource(movie, bibliotecaApp.movieList);
 
         when(mockedIO.input()).thenReturn("MV1");
-        boolean checkoutOneMovie = bibliotecaApp.checkoutOneMovie();
+        boolean checkoutOneMovie = bibliotecaApp.checkoutOneResource("movie");
 
 
         assertThat(checkoutOneMovie, is(true));
@@ -233,7 +233,7 @@ public class BibliotecaTest {
         bibliotecaApp.addResource(movie, bibliotecaApp.movieList);
 
         when(mockedIO.input()).thenReturn("WrongName");
-        boolean checkoutOneMovie = bibliotecaApp.checkoutOneMovie();
+        boolean checkoutOneMovie = bibliotecaApp.checkoutOneResource("movie");
 
         assertThat(checkoutOneMovie, is(Boolean.FALSE));
         verify(mockedIO, times(1)).output("That movie is not available.");

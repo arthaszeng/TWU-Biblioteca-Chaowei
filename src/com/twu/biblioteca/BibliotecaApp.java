@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -82,6 +83,11 @@ class BibliotecaApp {
             case "LB":
                 listRepositoryWithAllAttributes(bookList);
                 return true;
+            case "CB":
+                checkoutOneResource("Book");
+                return true;
+            case "CM":
+                checkoutOneResource("movie");
             case "QUIT":
                 mockedIO.output("Over!");
                 return false;
@@ -100,20 +106,36 @@ class BibliotecaApp {
         }
     }
 
-    boolean checkoutOneBook() {
-        String inputOfBookName = mockedIO.input();
-        if (bookList.isEmpty()) {
+    boolean checkoutOneResource(String whichResource) {
+        List<Resource> resources;
+        List<Resource> checkedResources;
+        String InputResourceName = mockedIO.input();
+        switch (whichResource.toUpperCase()) {
+            case "BOOK":
+                resources = bookList;
+                checkedResources = checkedBookList;
+                break;
+            case "MOVIE":
+                resources = movieList;
+                checkedResources = checkedMovieList;
+                break;
+            default:
+                resources = new ArrayList<>();
+                checkedResources = new ArrayList<>();
+        }
+
+        if (resources.isEmpty()) {
             return false;
         } else {
-            for (Resource book : bookList) {
-                if (book.getName().equals(inputOfBookName)) {
-                    bookList.remove(book);
-                    checkedBookList.add(book);
-                    mockedIO.output("Thank you! Enjoy the book");
+            for (Resource resource : resources) {
+                if (resource.getName().equals(InputResourceName)) {
+                    resources.remove(resource);
+                    checkedResources.add(resource);
+                    mockedIO.output("Thank you! Enjoy the " +whichResource.toLowerCase() + ".");
                     return true;
                 }
             }
-            mockedIO.output("That book is not available");
+            mockedIO.output("That " + whichResource.toLowerCase() + " is not available.");
             return false;
         }
     }
@@ -146,22 +168,7 @@ class BibliotecaApp {
         return null;
     }
 
-    boolean checkoutOneMovie() {
-        String inputMovie = mockedIO.input();
-        if (inputMovie.isEmpty()) {
-            mockedIO.output("Invalid input.");
-            return false;
-        } else {
-            for (Resource movie : movieList) {
-                    if (inputMovie.equals(movie.getName()) && movieList.remove(movie) && checkedMovieList.add(movie)) {
-                            mockedIO.output("Thank you! Enjoy the movie.");
-                            return true;
-                }
-            }
-            mockedIO.output("That movie is not available.");
-            return false;
-        }
-    }
+
 
     Resource queryOneMovie(String movieName, List<Resource> movieList) {
         for (Resource movie : movieList) {
