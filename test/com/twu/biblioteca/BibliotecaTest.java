@@ -90,6 +90,7 @@ public class BibliotecaTest {
     @Test
     public void testMockedIOCouldMockTerminalInputCorrectly() throws Exception {
         when(mockedIO.input()).thenReturn("right");
+
         assertEquals("right", mockedIO.input());
     }
 
@@ -105,18 +106,14 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldNotShowCheckedBook() throws Exception {
+    public void shouldNotShowCheckedBookWhenCheckOutSuccessfully() throws Exception {
         bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
-        bibliotecaApp.addOption("[LB] List Books");
-        bibliotecaApp.addOption("[CB] Checkout One Book");
 
-
-        bibliotecaApp.listRepository(bibliotecaApp.bookList);
         when(mockedIO.input()).thenReturn("myBook");
-        assertTrue(bibliotecaApp.checkoutOneResource("Book"));
-        bibliotecaApp.listRepository(bibliotecaApp.bookList);
+        boolean checkoutResult = bibliotecaApp.checkoutOneResource("Book");
 
-        verify(mockedIO, times(1)).output("myBook");
+        assertThat(checkoutResult, is(true));
+        assertThat(bibliotecaApp.queryOneResource("myBook", bibliotecaApp.bookList) == null, is(true));
     }
 
     @Test
@@ -125,10 +122,9 @@ public class BibliotecaTest {
 
         when(mockedIO.input()).thenReturn("myBook");
         boolean checkOutResult = bibliotecaApp.checkoutOneResource("Book");
-        bibliotecaApp.listRepository(bibliotecaApp.checkedBookList);
 
-        assertTrue(checkOutResult);
-        verify(mockedIO, times(1)).output("myBook");
+        assertThat(checkOutResult, is(true));
+        assertThat(bibliotecaApp.queryOneResource("myBook", bibliotecaApp.checkedBookList) != null, is(true));
     }
 
     @Test
@@ -138,7 +134,7 @@ public class BibliotecaTest {
         when(mockedIO.input()).thenReturn("myBook");
         boolean checkOutResult = bibliotecaApp.checkoutOneResource("Book");
 
-        assertTrue(checkOutResult);
+        assertThat(checkOutResult, is(true));
         verify(mockedIO, times(1)).output("Thank you! Enjoy the book.");
     }
 
@@ -149,7 +145,7 @@ public class BibliotecaTest {
         when(mockedIO.input()).thenReturn("wrongName");
         boolean checkOutResult = bibliotecaApp.checkoutOneResource("Book");
 
-        assertFalse(checkOutResult);
+        assertThat(checkOutResult, is(false));
         verify(mockedIO, times(1)).output("That book is not available.");
     }
 
@@ -162,9 +158,9 @@ public class BibliotecaTest {
         bibliotecaApp.addResource(bookInCheckedList, bibliotecaApp.checkedBookList);
 
         when(mockedIO.input()).thenReturn("BookInList");
-        assertTrue(bibliotecaApp.returnOneResource("book"));
-        assertTrue(bibliotecaApp.bookList.contains(bookInCheckedList));
-        assertFalse(bibliotecaApp.checkedBookList.contains(bookInCheckedList));
+        assertThat(bibliotecaApp.returnOneResource("book"), is(true));
+        assertThat(bibliotecaApp.bookList.contains(bookInCheckedList), is(true));
+        assertThat(bibliotecaApp.checkedBookList.contains(bookInCheckedList), is(false));
     }
 
     @Test
@@ -173,7 +169,7 @@ public class BibliotecaTest {
         bibliotecaApp.addResource(bookInCheckedList, bibliotecaApp.checkedBookList);
 
         when(mockedIO.input()).thenReturn("BookInList");
-        assertTrue(bibliotecaApp.returnOneResource("book"));
+        assertThat(bibliotecaApp.returnOneResource("book"), is(true));
 
         verify(mockedIO, times(1)).output("Thank you for returning the book.");
     }
@@ -182,7 +178,7 @@ public class BibliotecaTest {
     @Test
     public void shouldDisableFailMessageWhenBookIsInvalid() throws Exception {
         when(mockedIO.input()).thenReturn("wrongName");
-        assertFalse(bibliotecaApp.returnOneResource("book"));
+        assertThat(bibliotecaApp.returnOneResource("book"), is(false));
 
         verify(mockedIO, times(1)).output("That is not a valid book to return.");
     }
