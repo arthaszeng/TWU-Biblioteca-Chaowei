@@ -3,39 +3,37 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static sun.nio.cs.Surrogate.is;
+
 
 
 public class BibliotecaTest {
+    private BibliotecaApp bibliotecaApp;
+    private List<Book> bookList;
     private MockedIO mockedIO = mock(MockedIO.class);
-    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     @Before
     public void setUp() throws Exception {
-        System.setOut(new PrintStream(outputStream));
+        bookList = new ArrayList<>();
+        List<Book> checkedBookList = new ArrayList<>();
+        List<String> optionList = new ArrayList<>();
+        bibliotecaApp = new BibliotecaApp(bookList, checkedBookList, optionList, mockedIO);
     }
 
     @Test
     public void shouldShowWelcomeWhenAppStart() throws Exception {
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(new ArrayList<>(), new ArrayList<>(), new MockedIO());
-
         bibliotecaApp.showWelcome();
 
-        assertEquals("Welcome, App started\n", outputStream.toString());
+        verify(mockedIO, times(1)).output("Welcome, App started");
     }
 
     @Test
     public void shouldShowBookList() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("myBook", "Sli", "2016"));
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), mockedIO);
+        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         bibliotecaApp.listBooks(bibliotecaApp.bookList);
 
@@ -44,9 +42,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldShowBookListWithAllAttributes() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("myBook", "Sli", "2016"));
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), mockedIO);
+        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         bibliotecaApp.listBooksWithAllAttributes(bookList);
 
@@ -55,10 +51,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldShowListBooksOfOptions() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        optionList.add("[LB] List Books");
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
+        bibliotecaApp.addOption("[LB] List Books");
 
         bibliotecaApp.showOptions();
 
@@ -67,10 +60,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldSelectOneOptionWhenTypeKeyword() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        bookList.add(new Book ("myBook", "Sli", "2016"));
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
+        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("LB");
 
@@ -80,10 +70,6 @@ public class BibliotecaTest {
 
     @Test
     public void shouldHintWhenSelectAInvalidOption() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
-
         when(mockedIO.input()).thenReturn("wrongSelection");
 
         assertTrue(bibliotecaApp.selectOption());
@@ -92,10 +78,6 @@ public class BibliotecaTest {
 
     @Test
     public void shouldKeepingChooseOptionUntilSelectQuit() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
-
         when(mockedIO.input()).thenReturn("QUIT");
         bibliotecaApp.keepCycle();
 
@@ -103,18 +85,15 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void testMockedIOCouldMockTerminalInputCorectly() throws Exception {
+    public void testMockedIOCouldMockTerminalInputCorrectly() throws Exception {
         when(mockedIO.input()).thenReturn("right");
         assertEquals("right", mockedIO.input());
     }
 
     @Test
     public void shouldDisplayCheckOutOption() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        optionList.add("[LB] List Books");
-        optionList.add("[CB] Checkout One Book");
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, optionList, mockedIO);
+        bibliotecaApp.addOption("[LB] List Books");
+        bibliotecaApp.addOption("[CB] Checkout One Book");
 
         bibliotecaApp.showOptions();
 
@@ -124,12 +103,10 @@ public class BibliotecaTest {
 
     @Test
     public void shouldNotShowCheckedBook() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        bookList.add(new Book("myBook", "Sli", "2016"));
-        optionList.add("[LB] List Books");
-        optionList.add("[CB] Checkout One Book");
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(),optionList, mockedIO);
+        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addOption("[LB] List Books");
+        bibliotecaApp.addOption("[CB] Checkout One Book");
+
 
         bibliotecaApp.listBooks(bibliotecaApp.bookList);
         when(mockedIO.input()).thenReturn("myBook");
@@ -141,12 +118,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldKeepCheckedBooksInCheckedBookList() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        bookList.add(new Book("myBook", "Sli", "2016"));
-        optionList.add("[LB] List Books");
-        optionList.add("[CB] Checkout One Book");
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), optionList, mockedIO);
+        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("myBook");
         boolean checkOutResult = bibliotecaApp.checkoutOneBook();
@@ -158,12 +130,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldPrintSuccessfulMessageWhenCheckOutOneBookSuccessfully() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        bookList.add(new Book("myBook", "Sli", "2016"));
-        optionList.add("[LB] List Books");
-        optionList.add("[CB] Checkout One Book");
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), optionList, mockedIO);
+        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("myBook");
         boolean checkOutResult = bibliotecaApp.checkoutOneBook();
@@ -174,12 +141,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldPrintErrorMessageWhenCheckoutBookFailed() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        bookList.add(new Book("myBook", "Sli", "2016"));
-        optionList.add("[LB] List Books");
-        optionList.add("[CB] Checkout One Book");
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, new ArrayList<>(), optionList, mockedIO);
+        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("wrongName");
         boolean checkOutResult = bibliotecaApp.checkoutOneBook();
@@ -190,17 +152,11 @@ public class BibliotecaTest {
 
     @Test
     public void shouldAddReturnedBookInBookListAndRemoveFromCheckedBookListWhenBookExistInCheckedBookList() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<Book> checkedBookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-
         Book bookInList = new Book("BookInList", "author", "1");
         Book bookInCheckedList = new Book("BookInList", "author", "1");
 
-        bookList.add(bookInList);
-        checkedBookList.add(bookInCheckedList);
-
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, checkedBookList, optionList, mockedIO);
+        bibliotecaApp.addBook(bookInList, bibliotecaApp.bookList);
+        bibliotecaApp.addBook(bookInCheckedList, bibliotecaApp.checkedBookList);
 
         when(mockedIO.input()).thenReturn("BookInList");
         assertTrue(bibliotecaApp.returnBook());
@@ -210,14 +166,8 @@ public class BibliotecaTest {
 
     @Test
     public void shouldDisableSuccessfulMessageWhenBookIsValid() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<Book> checkedBookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-
         Book bookInCheckedList = new Book("BookInList", "author", "1");
-        checkedBookList.add(bookInCheckedList);
-
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, checkedBookList, optionList, mockedIO);
+        bibliotecaApp.addBook(bookInCheckedList, bibliotecaApp.checkedBookList);
 
         when(mockedIO.input()).thenReturn("BookInList");
         assertTrue(bibliotecaApp.returnBook());
@@ -228,12 +178,6 @@ public class BibliotecaTest {
 
     @Test
     public void shouldDisableFailMessageWhenBookIsInvalid() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<Book> checkedBookList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-
-        BibliotecaApp  bibliotecaApp = new BibliotecaApp(bookList, checkedBookList, optionList, mockedIO);
-
         when(mockedIO.input()).thenReturn("wrongName");
         assertFalse(bibliotecaApp.returnBook());
 

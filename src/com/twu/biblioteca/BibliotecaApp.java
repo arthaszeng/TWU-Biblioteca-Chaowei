@@ -11,13 +11,6 @@ class BibliotecaApp {
     private List<String> optionList;
     private MockedIO mockedIO;
 
-
-    BibliotecaApp(List<Book> bookList, List<String> optionList, MockedIO mockedIO) {
-        this.bookList = bookList;
-        this.optionList = optionList;
-        this.mockedIO = mockedIO;
-    }
-
     BibliotecaApp(List<Book> bookList, List<Book> checkedBookList, List<String> optionList, MockedIO mockedIO) {
         this.bookList = bookList;
         this.checkedBookList = checkedBookList;
@@ -29,21 +22,48 @@ class BibliotecaApp {
         mockedIO.output("Welcome, App started");
     }
 
-    void listBooks(List<Book> bookList) {
-        for (Book book : bookList) {
-            mockedIO.output(book.getName());
+    boolean addBook(Book book, List<Book> bookList) {
+        if (book != null) {
+            bookList.add(book);
+            return true;
+        } else
+            return false;
+    }
+
+    void addOption(String option) {
+        this.optionList.add(option);
+    }
+
+    boolean listBooks(List<Book> bookList) {
+        if (bookList.isEmpty()) {
+            return false;
+        } else {
+            for (Book book : bookList) {
+                mockedIO.output(book.getName());
+            }
+            return true;
         }
     }
 
-    void listBooksWithAllAttributes(List<Book> bookList) {
-        for (Book book : bookList) {
-            mockedIO.output(book.getAll());
+    boolean listBooksWithAllAttributes(List<Book> bookList) {
+        if (bookList.isEmpty()) {
+            return false;
+        } else {
+            for (Book book : bookList) {
+                mockedIO.output(book.getAll());
+            }
+            return true;
         }
     }
 
-    void showOptions() {
-        for (String option: optionList) {
-            mockedIO.output(option);
+    boolean showOptions() {
+        if (optionList.isEmpty()) {
+            return false;
+        } else {
+            for (String option : optionList) {
+                mockedIO.output(option);
+            }
+            return true;
         }
     }
 
@@ -115,4 +135,5 @@ class BibliotecaApp {
         }
         return null;
     }
+
 }
