@@ -1,8 +1,7 @@
 package com.twu.biblioteca;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
+
 
 class BibliotecaApp {
     List<Book> bookList;
@@ -168,7 +167,7 @@ class BibliotecaApp {
         }
     }
 
-    Book queryOneBook(String bookName, List<Book> bookList) {
+    private Book queryOneBook(String bookName, List<Book> bookList) {
         for (Book aBook : bookList) {
             if (aBook.getName().equals(bookName)) {
                 return aBook;
@@ -209,6 +208,7 @@ class BibliotecaApp {
         mockedIO.output("Please input your password:");
         String password = mockedIO.input();
 
-        return customerDataManagement.login(account, password);
+        User user = customerDataManagement.login(account, password);
+        return user != null;
     }
 }
