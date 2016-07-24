@@ -21,18 +21,6 @@ public class Movie {
         return name;
     }
 
-    public String getYear() {
-        return year;
-    }
-
-    public String getDirector() {
-        return director;
-    }
-
-    String getRating() {
-        return rating;
-    }
-
     String getAll() {
         return name + "\t" + year + "\t" + director + "\t" + rating;
     }

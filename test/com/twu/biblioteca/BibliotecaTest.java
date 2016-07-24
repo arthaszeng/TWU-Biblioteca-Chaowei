@@ -255,4 +255,9 @@ public class BibliotecaTest {
 
         assertThat(loginResult, is(true));
     }
+
+    @Test
+    public void shouldVerifyUserBeforeCheckingOutBook() throws Exception {
+
+    }
 }

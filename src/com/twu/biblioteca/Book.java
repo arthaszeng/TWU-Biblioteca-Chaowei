@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
-public class
-Book {
+public class Book {
     private String author;
     private String publishDate;
     private String name;
@@ -16,15 +15,7 @@ Book {
         return this.name;
     }
 
-    private String getAuthor() {
-        return author;
-    }
-
-    private String getPublishDate() {
-        return publishDate;
-    }
-
     String getAll() {
-        return getName()+"\t"+getAuthor()+"\t"+getPublishDate();
+        return getName()+"\t"+author+"\t"+publishDate;
     }
 }
