@@ -193,8 +193,8 @@ public class BibliotecaTest {
 
     @Test
     public void shouldShowAListOfMovies() throws Exception {
-        bibliotecaApp.addMovie(new Movie("MV1", "1", "Sli", "10"), bibliotecaApp.movieList);
-        bibliotecaApp.addMovie(new Movie("MV2", "2", "Sli", "1"), bibliotecaApp.movieList);
+        bibliotecaApp.addResource(new Movie("MV1", "1", "Sli", "10"), bibliotecaApp.movieList);
+        bibliotecaApp.addResource(new Movie("MV2", "2", "Sli", "1"), bibliotecaApp.movieList);
 
         bibliotecaApp.listRepository(bibliotecaApp.movieList);
 
@@ -204,8 +204,8 @@ public class BibliotecaTest {
 
     @Test
     public void shouldShowAListOfMoviesWithAttributes() throws Exception {
-        bibliotecaApp.addMovie(new Movie("MV1", "1", "Sli", "10"), bibliotecaApp.movieList);
-        bibliotecaApp.addMovie(new Movie("MV2", "2", "Sli", "1"), bibliotecaApp.movieList);
+        bibliotecaApp.addResource(new Movie("MV1", "1", "Sli", "10"), bibliotecaApp.movieList);
+        bibliotecaApp.addResource(new Movie("MV2", "2", "Sli", "1"), bibliotecaApp.movieList);
 
         bibliotecaApp.listRepositoryWithAllAttributes(bibliotecaApp.movieList);
 
@@ -216,7 +216,7 @@ public class BibliotecaTest {
     @Test
     public void shouldCheckOutAMovieWhenInputIsValid() throws Exception {
         Movie movie = new Movie("MV1", "1", "Sli", "10");
-        bibliotecaApp.addMovie(movie, bibliotecaApp.movieList);
+        bibliotecaApp.addResource(movie, bibliotecaApp.movieList);
 
         when(mockedIO.input()).thenReturn("MV1");
         boolean checkoutOneMovie = bibliotecaApp.checkoutOneMovie();
@@ -230,7 +230,7 @@ public class BibliotecaTest {
     @Test
     public void shouldCheckOutAMovieWhenInputIsInvalid() throws Exception {
         Movie movie = new Movie("MV1", "1", "Sli", "10");
-        bibliotecaApp.addMovie(movie, bibliotecaApp.movieList);
+        bibliotecaApp.addResource(movie, bibliotecaApp.movieList);
 
         when(mockedIO.input()).thenReturn("WrongName");
         boolean checkoutOneMovie = bibliotecaApp.checkoutOneMovie();

@@ -32,17 +32,9 @@ class BibliotecaApp {
         mockedIO.output("Welcome, App started");
     }
 
-    boolean addResource(Resource book, List<Resource> bookList) {
-        if (book != null) {
-            bookList.add(book);
-            return true;
-        } else
-            return false;
-    }
-
-    boolean addMovie(Movie movie, List<Resource> movieList) {
-        if (movie != null) {
-            movieList.add(movie);
+    boolean addResource(Resource resource, List<Resource> list) {
+        if (resource != null) {
+            list.add(resource);
             return true;
         } else
             return false;
