@@ -4,7 +4,7 @@ package com.twu.biblioteca;
 //        As a customer, I would like to see a list of available movies, so that I can browse for a movie that I might check-out.
 //        Movies have a name, year, director and movie rating (from 1-10 or unrated).
 
-public class Movie {
+public class Movie implements Resource {
     private String name;
     private String year;
     private String director;
@@ -17,11 +17,11 @@ public class Movie {
         this.rating = rating;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    String getAll() {
+    public String getAll() {
         return name + "\t" + year + "\t" + director + "\t" + rating;
     }
 }

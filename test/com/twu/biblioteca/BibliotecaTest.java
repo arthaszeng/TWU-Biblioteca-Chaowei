@@ -2,7 +2,6 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.matchers.Null;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +19,8 @@ public class BibliotecaTest {
 
     @Before
     public void setUp() throws Exception {
-        List<Book> bookList = new ArrayList<>();
-        List<Book> checkedBookList = new ArrayList<>();
+        List<Resource> bookList = new ArrayList<>();
+        List<Resource> checkedBookList = new ArrayList<>();
         List<Movie> movieList = new ArrayList<>();
         List<Movie> checkedMovieList = new ArrayList<>();
         List<String> optionList = new ArrayList<>();
@@ -39,7 +38,7 @@ public class BibliotecaTest {
     public void shouldShowBookList() throws Exception {
         bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
-        bibliotecaApp.listBooks(bibliotecaApp.bookList);
+        bibliotecaApp.listRepository(bibliotecaApp.bookList);
 
         verify(mockedIO, times(1)).output("myBook");
     }
@@ -112,10 +111,10 @@ public class BibliotecaTest {
         bibliotecaApp.addOption("[CB] Checkout One Book");
 
 
-        bibliotecaApp.listBooks(bibliotecaApp.bookList);
+        bibliotecaApp.listRepository(bibliotecaApp.bookList);
         when(mockedIO.input()).thenReturn("myBook");
         assertTrue(bibliotecaApp.checkoutOneBook());
-        bibliotecaApp.listBooks(bibliotecaApp.bookList);
+        bibliotecaApp.listRepository(bibliotecaApp.bookList);
 
         verify(mockedIO, times(1)).output("myBook");
     }
@@ -126,7 +125,7 @@ public class BibliotecaTest {
 
         when(mockedIO.input()).thenReturn("myBook");
         boolean checkOutResult = bibliotecaApp.checkoutOneBook();
-        bibliotecaApp.listBooks(bibliotecaApp.checkedBookList);
+        bibliotecaApp.listRepository(bibliotecaApp.checkedBookList);
 
         assertTrue(checkOutResult);
         verify(mockedIO, times(1)).output("myBook");

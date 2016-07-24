@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-public class Book {
+public class Book implements Resource {
     private String author;
     private String publishDate;
     private String name;
@@ -11,11 +11,11 @@ public class Book {
         this.publishDate = publishDate;
     }
 
-    String getName() {
+    public String getName() {
         return this.name;
     }
 
-    String getAll() {
+    public String getAll() {
         return getName()+"\t"+author+"\t"+publishDate;
     }
 }

@@ -4,17 +4,17 @@ import java.util.List;
 
 
 class BibliotecaApp {
-    List<Book> bookList;
+    List<Resource> bookList;
     List<Movie> movieList;
-    List<Book> checkedBookList;
+    List<Resource> checkedBookList;
     List<Movie> checkedMovieList;
     private List<String> optionList;
     private MockedIO mockedIO;
     private CustomerDataManagement customerDataManagement;
 
-    BibliotecaApp(List<Book> bookList,
+    BibliotecaApp(List<Resource> bookList,
                   List<Movie> movieList,
-                  List<Book> checkedBookList,
+                  List<Resource> checkedBookList,
                   List<Movie> checkedMovieList,
                   List<String> optionList,
                   MockedIO mockedIO,
@@ -32,7 +32,7 @@ class BibliotecaApp {
         mockedIO.output("Welcome, App started");
     }
 
-    boolean addBook(Book book, List<Book> bookList) {
+    boolean addBook(Book book, List<Resource> bookList) {
         if (book != null) {
             bookList.add(book);
             return true;
@@ -52,12 +52,12 @@ class BibliotecaApp {
         this.optionList.add(option);
     }
 
-    boolean listBooks(List<Book> bookList) {
-        if (bookList.isEmpty()) {
+    boolean listRepository(List<Resource> list) {
+        if (list.isEmpty()) {
             return false;
         } else {
-            for (Book book : bookList) {
-                mockedIO.output(book.getName());
+            for (Resource resource : list) {
+                mockedIO.output(resource.getName());
             }
             return true;
         }
@@ -74,11 +74,11 @@ class BibliotecaApp {
         }
     }
 
-    boolean listBooksWithAllAttributes(List<Book> bookList) {
+    boolean listBooksWithAllAttributes(List<Resource> bookList) {
         if (bookList.isEmpty()) {
             return false;
         } else {
-            for (Book book : bookList) {
+            for (Resource book : bookList) {
                 mockedIO.output(book.getAll());
             }
             return true;
@@ -135,7 +135,7 @@ class BibliotecaApp {
         if (bookList.isEmpty()) {
             return false;
         } else {
-            for (Book book : bookList) {
+            for (Resource book : bookList) {
                 if (book.getName().equals(inputOfBookName)) {
                     bookList.remove(book);
                     checkedBookList.add(book);
@@ -167,10 +167,10 @@ class BibliotecaApp {
         }
     }
 
-    private Book queryOneBook(String bookName, List<Book> bookList) {
-        for (Book aBook : bookList) {
+    private Book queryOneBook(String bookName, List<Resource> bookList) {
+        for (Resource aBook : bookList) {
             if (aBook.getName().equals(bookName)) {
-                return aBook;
+                return (Book) aBook;
             }
         }
         return null;
@@ -211,4 +211,6 @@ class BibliotecaApp {
         User user = customerDataManagement.login(account, password);
         return user != null;
     }
+
+
 }
