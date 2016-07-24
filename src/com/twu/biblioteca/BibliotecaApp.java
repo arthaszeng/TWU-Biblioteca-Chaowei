@@ -5,17 +5,17 @@ import java.util.List;
 
 class BibliotecaApp {
     List<Resource> bookList;
-    List<Movie> movieList;
+    List<Resource> movieList;
     List<Resource> checkedBookList;
-    List<Movie> checkedMovieList;
+    List<Resource> checkedMovieList;
     private List<String> optionList;
     private MockedIO mockedIO;
     private CustomerDataManagement customerDataManagement;
 
     BibliotecaApp(List<Resource> bookList,
-                  List<Movie> movieList,
+                  List<Resource> movieList,
                   List<Resource> checkedBookList,
-                  List<Movie> checkedMovieList,
+                  List<Resource> checkedMovieList,
                   List<String> optionList,
                   MockedIO mockedIO,
                   CustomerDataManagement customerDataManagement) {
@@ -40,7 +40,7 @@ class BibliotecaApp {
             return false;
     }
 
-    boolean addMovie(Movie movie, List<Movie> movieList) {
+    boolean addMovie(Movie movie, List<Resource> movieList) {
         if (movie != null) {
             movieList.add(movie);
             return true;
@@ -63,11 +63,11 @@ class BibliotecaApp {
         }
     }
 
-    boolean listMovies(List<Movie> movieList) {
+    boolean listMovies(List<Resource> movieList) {
         if (movieList.isEmpty()) {
             return false;
         } else {
-            for (Movie movie : movieList) {
+            for (Resource movie : movieList) {
                 mockedIO.output(movie.getName());
             }
             return true;
@@ -85,11 +85,11 @@ class BibliotecaApp {
         }
     }
 
-    boolean listMoviesWithAllAttributes(List<Movie> movieList) {
+    boolean listMoviesWithAllAttributes(List<Resource> movieList) {
         if (movieList.isEmpty()) {
             return false;
         } else {
-            for (Movie movie : movieList) {
+            for (Resource movie : movieList) {
                 mockedIO.output(movie.getAll());
             }
             return true;
@@ -182,7 +182,7 @@ class BibliotecaApp {
             mockedIO.output("Invalid input.");
             return false;
         } else {
-            for (Movie movie : movieList) {
+            for (Resource movie : movieList) {
                     if (inputMovie.equals(movie.getName()) && movieList.remove(movie) && checkedMovieList.add(movie)) {
                             mockedIO.output("Thank you! Enjoy the movie.");
                             return true;
@@ -193,8 +193,8 @@ class BibliotecaApp {
         }
     }
 
-    Movie queryOneMovie(String movieName, List<Movie> movieList) {
-        for (Movie movie : movieList) {
+    Resource queryOneMovie(String movieName, List<Resource> movieList) {
+        for (Resource movie : movieList) {
             if (movie.getName().equals(movieName)) {
                 return movie;
             }

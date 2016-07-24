@@ -21,8 +21,8 @@ public class BibliotecaTest {
     public void setUp() throws Exception {
         List<Resource> bookList = new ArrayList<>();
         List<Resource> checkedBookList = new ArrayList<>();
-        List<Movie> movieList = new ArrayList<>();
-        List<Movie> checkedMovieList = new ArrayList<>();
+        List<Resource> movieList = new ArrayList<>();
+        List<Resource> checkedMovieList = new ArrayList<>();
         List<String> optionList = new ArrayList<>();
         bibliotecaApp = new BibliotecaApp(bookList, movieList, checkedBookList, checkedMovieList, optionList, mockedIO, customerDataManagement);
     }
