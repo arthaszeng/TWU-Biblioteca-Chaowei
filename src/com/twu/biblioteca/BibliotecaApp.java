@@ -32,7 +32,7 @@ class BibliotecaApp {
         mockedIO.output("Welcome, App started");
     }
 
-    boolean addBook(Book book, List<Resource> bookList) {
+    boolean addResource(Resource book, List<Resource> bookList) {
         if (book != null) {
             bookList.add(book);
             return true;
@@ -63,34 +63,12 @@ class BibliotecaApp {
         }
     }
 
-    boolean listMovies(List<Resource> movieList) {
-        if (movieList.isEmpty()) {
+    boolean listRepositoryWithAllAttributes(List<Resource> list) {
+        if (list.isEmpty()) {
             return false;
         } else {
-            for (Resource movie : movieList) {
-                mockedIO.output(movie.getName());
-            }
-            return true;
-        }
-    }
-
-    boolean listBooksWithAllAttributes(List<Resource> bookList) {
-        if (bookList.isEmpty()) {
-            return false;
-        } else {
-            for (Resource book : bookList) {
-                mockedIO.output(book.getAll());
-            }
-            return true;
-        }
-    }
-
-    boolean listMoviesWithAllAttributes(List<Resource> movieList) {
-        if (movieList.isEmpty()) {
-            return false;
-        } else {
-            for (Resource movie : movieList) {
-                mockedIO.output(movie.getAll());
+            for (Resource resource : list) {
+                mockedIO.output(resource.getAll());
             }
             return true;
         }
@@ -110,7 +88,7 @@ class BibliotecaApp {
     boolean selectOption() {
         switch (mockedIO.input().toUpperCase()) {
             case "LB":
-                listBooksWithAllAttributes(bookList);
+                listRepositoryWithAllAttributes(bookList);
                 return true;
             case "QUIT":
                 mockedIO.output("Over!");

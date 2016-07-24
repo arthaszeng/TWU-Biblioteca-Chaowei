@@ -36,7 +36,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldShowBookList() throws Exception {
-        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         bibliotecaApp.listRepository(bibliotecaApp.bookList);
 
@@ -45,9 +45,9 @@ public class BibliotecaTest {
 
     @Test
     public void shouldShowBookListWithAllAttributes() throws Exception {
-        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
-        bibliotecaApp.listBooksWithAllAttributes(bibliotecaApp.bookList);
+        bibliotecaApp.listRepositoryWithAllAttributes(bibliotecaApp.bookList);
 
         verify(mockedIO, times(1)).output("myBook\tSli\t2016");
     }
@@ -63,7 +63,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldSelectOneOptionWhenTypeKeyword() throws Exception {
-        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("LB");
 
@@ -106,7 +106,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldNotShowCheckedBook() throws Exception {
-        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
         bibliotecaApp.addOption("[LB] List Books");
         bibliotecaApp.addOption("[CB] Checkout One Book");
 
@@ -121,7 +121,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldKeepCheckedBooksInCheckedBookList() throws Exception {
-        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("myBook");
         boolean checkOutResult = bibliotecaApp.checkoutOneBook();
@@ -133,7 +133,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldPrintSuccessfulMessageWhenCheckOutOneBookSuccessfully() throws Exception {
-        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("myBook");
         boolean checkOutResult = bibliotecaApp.checkoutOneBook();
@@ -144,7 +144,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldPrintErrorMessageWhenCheckoutBookFailed() throws Exception {
-        bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
         when(mockedIO.input()).thenReturn("wrongName");
         boolean checkOutResult = bibliotecaApp.checkoutOneBook();
@@ -158,8 +158,8 @@ public class BibliotecaTest {
         Book bookInList = new Book("BookInList", "author", "1");
         Book bookInCheckedList = new Book("BookInList", "author", "1");
 
-        bibliotecaApp.addBook(bookInList, bibliotecaApp.bookList);
-        bibliotecaApp.addBook(bookInCheckedList, bibliotecaApp.checkedBookList);
+        bibliotecaApp.addResource(bookInList, bibliotecaApp.bookList);
+        bibliotecaApp.addResource(bookInCheckedList, bibliotecaApp.checkedBookList);
 
         when(mockedIO.input()).thenReturn("BookInList");
         assertTrue(bibliotecaApp.returnBook());
@@ -170,7 +170,7 @@ public class BibliotecaTest {
     @Test
     public void shouldDisableSuccessfulMessageWhenBookIsValid() throws Exception {
         Book bookInCheckedList = new Book("BookInList", "author", "1");
-        bibliotecaApp.addBook(bookInCheckedList, bibliotecaApp.checkedBookList);
+        bibliotecaApp.addResource(bookInCheckedList, bibliotecaApp.checkedBookList);
 
         when(mockedIO.input()).thenReturn("BookInList");
         assertTrue(bibliotecaApp.returnBook());
@@ -196,7 +196,7 @@ public class BibliotecaTest {
         bibliotecaApp.addMovie(new Movie("MV1", "1", "Sli", "10"), bibliotecaApp.movieList);
         bibliotecaApp.addMovie(new Movie("MV2", "2", "Sli", "1"), bibliotecaApp.movieList);
 
-        bibliotecaApp.listMovies(bibliotecaApp.movieList);
+        bibliotecaApp.listRepository(bibliotecaApp.movieList);
 
         verify(mockedIO, times(1)).output("MV1");
         verify(mockedIO, times(1)).output("MV2");
@@ -207,7 +207,7 @@ public class BibliotecaTest {
         bibliotecaApp.addMovie(new Movie("MV1", "1", "Sli", "10"), bibliotecaApp.movieList);
         bibliotecaApp.addMovie(new Movie("MV2", "2", "Sli", "1"), bibliotecaApp.movieList);
 
-        bibliotecaApp.listMoviesWithAllAttributes(bibliotecaApp.movieList);
+        bibliotecaApp.listRepositoryWithAllAttributes(bibliotecaApp.movieList);
 
         verify(mockedIO, times(1)).output("MV1\t1\tSli\t10");
         verify(mockedIO, times(1)).output("MV2\t2\tSli\t1");
