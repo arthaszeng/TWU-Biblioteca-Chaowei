@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
-public class Book {
+public class
+Book {
     private String author;
     private String publishDate;
     private String name;

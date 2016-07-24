@@ -13,15 +13,16 @@ import static org.mockito.Mockito.*;
 
 public class BibliotecaTest {
     private BibliotecaApp bibliotecaApp;
-    private List<Book> bookList;
     private MockedIO mockedIO = mock(MockedIO.class);
 
     @Before
     public void setUp() throws Exception {
-        bookList = new ArrayList<>();
+        List<Book> bookList = new ArrayList<>();
         List<Book> checkedBookList = new ArrayList<>();
+        List<Movie> movieList = new ArrayList<>();
+        List<Movie> checkedMovieList = new ArrayList<>();
         List<String> optionList = new ArrayList<>();
-        bibliotecaApp = new BibliotecaApp(bookList, checkedBookList, optionList, mockedIO);
+        bibliotecaApp = new BibliotecaApp(bookList, movieList, checkedBookList, checkedMovieList, optionList, mockedIO);
     }
 
     @Test
@@ -44,7 +45,7 @@ public class BibliotecaTest {
     public void shouldShowBookListWithAllAttributes() throws Exception {
         bibliotecaApp.addBook(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
 
-        bibliotecaApp.listBooksWithAllAttributes(bookList);
+        bibliotecaApp.listBooksWithAllAttributes(bibliotecaApp.bookList);
 
         verify(mockedIO, times(1)).output("myBook\tSli\t2016");
     }
@@ -182,5 +183,20 @@ public class BibliotecaTest {
         assertFalse(bibliotecaApp.returnBook());
 
         verify(mockedIO, times(1)).output("That is not a valid book to return.");
+    }
+
+//    List Movies -
+//    As a customer, I would like to see a list of available movies, so that I can browse for a movie that I might check-out.
+//    Movies have a name, year, director and movie rating (from 1-10 or unrated).
+
+    @Test
+    public void shouldShowAListOfMovies() throws Exception {
+        bibliotecaApp.addMovie(new Movie("MV1", "1", "Sli", "10"), bibliotecaApp.movieList);
+        bibliotecaApp.addMovie(new Movie("MV2", "2", "Sli", "1"), bibliotecaApp.movieList);
+
+        bibliotecaApp.listMovies(bibliotecaApp.movieList);
+
+        verify(mockedIO, times(1)).output("MV1");
+        verify(mockedIO, times(1)).output("MV2");
     }
 }

@@ -1,19 +1,20 @@
 package com.twu.biblioteca;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
-import java.util.ArrayList;
 import java.util.List;
 
 class BibliotecaApp {
     List<Book> bookList;
+    List<Movie> movieList;
     List<Book> checkedBookList;
+    private List<Movie> checkedMovieList;
     private List<String> optionList;
     private MockedIO mockedIO;
 
-    BibliotecaApp(List<Book> bookList, List<Book> checkedBookList, List<String> optionList, MockedIO mockedIO) {
+    BibliotecaApp(List<Book> bookList, List<Movie> movieList, List<Book> checkedBookList, List<Movie> checkedMovieList, List<String> optionList, MockedIO mockedIO) {
         this.bookList = bookList;
+        this.movieList = movieList;
         this.checkedBookList = checkedBookList;
+        this.checkedMovieList = checkedMovieList;
         this.optionList = optionList;
         this.mockedIO = mockedIO;
     }
@@ -25,6 +26,14 @@ class BibliotecaApp {
     boolean addBook(Book book, List<Book> bookList) {
         if (book != null) {
             bookList.add(book);
+            return true;
+        } else
+            return false;
+    }
+
+    boolean addMovie(Movie movie, List<Movie> movieList) {
+        if (movie != null) {
+            movieList.add(movie);
             return true;
         } else
             return false;
@@ -45,12 +54,34 @@ class BibliotecaApp {
         }
     }
 
+    boolean listMovies(List<Movie> movieList) {
+        if (movieList.isEmpty()) {
+            return false;
+        } else {
+            for (Movie movie : movieList) {
+                mockedIO.output(movie.getName());
+            }
+            return true;
+        }
+    }
+
     boolean listBooksWithAllAttributes(List<Book> bookList) {
         if (bookList.isEmpty()) {
             return false;
         } else {
             for (Book book : bookList) {
                 mockedIO.output(book.getAll());
+            }
+            return true;
+        }
+    }
+
+    boolean listMoviesWithAllAttributes(List<Movie> movieList) {
+        if (movieList.isEmpty()) {
+            return false;
+        } else {
+            for (Movie movie : movieList) {
+                mockedIO.output(movie.getAll());
             }
             return true;
         }
@@ -135,5 +166,4 @@ class BibliotecaApp {
         }
         return null;
     }
-
 }
