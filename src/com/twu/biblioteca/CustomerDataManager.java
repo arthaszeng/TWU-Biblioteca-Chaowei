@@ -2,10 +2,10 @@ package com.twu.biblioteca;
 
 import java.util.*;
 
-class CustomerDataManagement {
+class CustomerDataManager {
     private List<User> userList = new ArrayList<>();
 
-    CustomerDataManagement() {
+    CustomerDataManager() {
         userList.add(new User("admin", "email", "phone","123-4567", "admin"));
         userList.add(new User("test", "test", "test", "test", "test"));
     }

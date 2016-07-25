@@ -3,9 +3,6 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -15,25 +12,26 @@ import static org.mockito.Mockito.*;
 public class BibliotecaTest {
     private BibliotecaApp bibliotecaApp;
     private MockedIO mockedIO = mock(MockedIO.class);
-    private CustomerDataManagement customerDataManagement = new CustomerDataManagement();
+    private CustomerDataManager customerDataManager = new CustomerDataManager();
 
     @Before
     public void setUp() throws Exception {
-        List<Resource> bookList = new ArrayList<>();
-        List<Resource> checkedBookList = new ArrayList<>();
-        List<Resource> movieList = new ArrayList<>();
-        List<Resource> checkedMovieList = new ArrayList<>();
-        List<String> optionList = new ArrayList<>();
-        bibliotecaApp = new BibliotecaApp(bookList, movieList, checkedBookList, checkedMovieList, optionList, mockedIO, customerDataManagement);
+        bibliotecaApp = new BibliotecaApp(mockedIO, customerDataManager);
+
         when(mockedIO.input()).thenReturn("test", "test");
-        bibliotecaApp.login();
+        this.bibliotecaApp.login();
     }
 
     @Test
     public void shouldShowWelcomeWhenAppStart() throws Exception {
         bibliotecaApp.showWelcome();
-
         verify(mockedIO, times(1)).output("Welcome, App started");
+    }
+
+    @Test
+    public void shouldShowEmptyBookList() throws Exception {
+        bibliotecaApp.listRepository(bibliotecaApp.bookList);
+        verify(mockedIO, times(2)).output(anyString());
     }
 
     @Test
@@ -69,7 +67,9 @@ public class BibliotecaTest {
 
         when(mockedIO.input()).thenReturn("LB");
 
-        assertTrue( bibliotecaApp.selectOption());
+        boolean result = bibliotecaApp.selectOption();
+
+        assertThat(result, is(true));
         verify(mockedIO, times(1)).output("myBook\tSli\t2016");
     }
 

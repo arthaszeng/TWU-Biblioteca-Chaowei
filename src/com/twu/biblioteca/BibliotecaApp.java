@@ -5,29 +5,18 @@ import java.util.List;
 
 
 class BibliotecaApp {
-    List<Resource> bookList;
-    List<Resource> movieList;
-    List<Resource> checkedBookList;
-    List<Resource> checkedMovieList;
-    private List<String> optionList;
+    List<Resource> bookList = new ArrayList<>();
+    List<Resource> movieList = new ArrayList<>();
+    List<Resource> checkedBookList = new ArrayList<>();
+    List<Resource> checkedMovieList = new ArrayList<>();
+    private List<String> optionList = new ArrayList<>();
     private MockedIO mockedIO;
-    CustomerDataManagement customerDataManagement;
+    private CustomerDataManager customerDataManager;
     private User currentUser = null;
 
-    BibliotecaApp(List<Resource> bookList,
-                  List<Resource> movieList,
-                  List<Resource> checkedBookList,
-                  List<Resource> checkedMovieList,
-                  List<String> optionList,
-                  MockedIO mockedIO,
-                  CustomerDataManagement customerDataManagement) {
-        this.bookList = bookList;
-        this.movieList = movieList;
-        this.checkedBookList = checkedBookList;
-        this.checkedMovieList = checkedMovieList;
-        this.optionList = optionList;
+    BibliotecaApp(MockedIO mockedIO, CustomerDataManager customerDataManager) {
         this.mockedIO = mockedIO;
-        this.customerDataManagement = customerDataManagement;
+        this.customerDataManager = customerDataManager;
     }
 
     void showWelcome() {
@@ -46,14 +35,9 @@ class BibliotecaApp {
         this.optionList.add(option);
     }
 
-    boolean listRepository(List<Resource> list) {
-        if (list.isEmpty()) {
-            return false;
-        } else {
-            for (Resource resource : list) {
-                mockedIO.output(resource.getName());
-            }
-            return true;
+    void listRepository(List<Resource> list) {
+        for (Resource resource : list) {
+            mockedIO.output(resource.getName());
         }
     }
 
@@ -117,7 +101,7 @@ class BibliotecaApp {
         }
 
         for (Resource resource : resources) {
-            if (resource.getName().equals (InputResourceName)) {
+            if (resource.getName().equals(InputResourceName)) {
                 resources.remove(resource);
                 resource.updateHolder(getCurrentUser().getLibraryNumber());
                 checkedResources.add(resource);
@@ -161,8 +145,8 @@ class BibliotecaApp {
                 checkedResources.remove(queriedOneResource);
                 queriedOneResource.updateHolder("PLACEHOLDER");
                 resources.add(queriedOneResource);
-                    mockedIO.output("Thank you for returning the " + whichResource.toLowerCase() + ".");
-                    return true;
+                mockedIO.output("Thank you for returning the " + whichResource.toLowerCase() + ".");
+                return true;
             }
         }
     }
@@ -173,7 +157,7 @@ class BibliotecaApp {
         mockedIO.output("Please input your password:");
         String password = mockedIO.input();
 
-        currentUser = customerDataManagement.login(account, password);
+        currentUser = customerDataManager.login(account, password);
 
         return currentUser != null;
     }
@@ -193,4 +177,5 @@ class BibliotecaApp {
         } else
             return false;
     }
+
 }
