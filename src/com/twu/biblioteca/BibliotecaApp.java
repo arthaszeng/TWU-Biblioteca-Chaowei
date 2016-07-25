@@ -5,74 +5,60 @@ import java.util.List;
 
 
 class BibliotecaApp {
-    List<Resource> bookList = new ArrayList<>();
-    List<Resource> movieList = new ArrayList<>();
-    List<Resource> checkedBookList = new ArrayList<>();
-    List<Resource> checkedMovieList = new ArrayList<>();
     private List<String> optionList = new ArrayList<>();
     private MockedIO mockedIO;
     private CustomerDataManager customerDataManager;
-    private User currentUser = null;
+    private ResourceManager resourceManager;
+    private User currentUser;
 
-    BibliotecaApp(MockedIO mockedIO, CustomerDataManager customerDataManager) {
+    BibliotecaApp(MockedIO mockedIO, CustomerDataManager customerDataManager, ResourceManager resourceManager) {
         this.mockedIO = mockedIO;
         this.customerDataManager = customerDataManager;
+        this.resourceManager = resourceManager;
     }
 
     void showWelcome() {
         mockedIO.output("Welcome, App started");
     }
 
-    boolean addResource(Resource resource, List<Resource> list) {
-        if (resource != null) {
-            list.add(resource);
-            return true;
-        } else
-            return false;
+    void addResource(Resource resource, String whichResource) {
+        resourceManager.addResource(resource, whichResource);
     }
 
     void addOption(String option) {
         this.optionList.add(option);
     }
 
-    void listRepository(List<Resource> list) {
-        for (Resource resource : list) {
+    void listRepository(String whichResource) {
+        List<Resource> resources = resourceManager.fetchResources(whichResource);
+        for (Resource resource : resources) {
             mockedIO.output(resource.getName());
         }
     }
 
-    boolean listRepositoryWithAllAttributes(List<Resource> list) {
-        if (list.isEmpty()) {
-            return false;
-        } else {
-            for (Resource resource : list) {
-                mockedIO.output(resource.getAll());
-            }
-            return true;
+    void listRepositoryWithAllAttributes(String whichResource) {
+        List<Resource> resources = resourceManager.fetchResources(whichResource);
+        for (Resource resource : resources) {
+            mockedIO.output(resource.getAll());
         }
     }
 
-    boolean showOptions() {
-        if (optionList.isEmpty()) {
-            return false;
-        } else {
-            for (String option : optionList) {
-                mockedIO.output(option);
-            }
-            return true;
+    void showOptions() {
+        for (String option : optionList) {
+            mockedIO.output(option);
         }
     }
 
     boolean selectOption() {
         switch (mockedIO.input().toUpperCase()) {
             case "LB":
-                listRepositoryWithAllAttributes(bookList);
+                listRepositoryWithAllAttributes("book");
                 return true;
             case "CB":
-                checkoutOneResource("Book");
+                checkOutOneResource("Book");
                 return true;
             case "CM":
-                checkoutOneResource("movie");
+                checkOutOneResource("movie");
             case "QUIT":
                 mockedIO.output("Over!");
                 return false;
@@ -91,64 +77,34 @@ class BibliotecaApp {
         }
     }
 
-    boolean checkoutOneResource(String whichResource) {
-        List<Resource> resources = whichResource.toUpperCase().equals("BOOK") ? bookList : movieList;
-        List<Resource> checkedResources = whichResource.toUpperCase().equals("BOOK") ? checkedBookList : checkedMovieList;
-        String InputResourceName = mockedIO.input();
+    boolean checkOutOneResource(String whichResource) {
+        verifyUser();///////////////////////////
 
-        if (resources.isEmpty() || !verifyUser()) {
-            return false;
-        }
+        String resourceName = mockedIO.input();
 
-        for (Resource resource : resources) {
-            if (resource.getName().equals(InputResourceName)) {
-                resources.remove(resource);
-                resource.updateHolder(getCurrentUser().getLibraryNumber());
-                checkedResources.add(resource);
+        boolean result = resourceManager.checkOutOneResource(resourceName, whichResource, currentUser.getLibraryNumber());
 
-                mockedIO.output("Thank you! Enjoy the " + whichResource.toLowerCase() + ".");
-                return true;
-            }
-        }
+        String message = result ? "Thank you! Enjoy the " + whichResource.toLowerCase() + "." : "That " + whichResource.toLowerCase() + " is not available.";
+        mockedIO.output(message);
 
-        mockedIO.output("That " + whichResource.toLowerCase() + " is not available.");
-        return false;
+        return result;
     }
 
     private boolean verifyUser() {
         return currentUser != null;
     }
 
-    Resource queryOneResource(String resourceName, List<Resource> resources) {
-        for (Resource resource : resources) {
-            if (resource.getName().equals(resourceName)) {
-                return resource;
-            }
-        }
-        return null;
+    boolean queryOneResource(String resourceName, String whichResources) {
+        return resourceManager.queryOneResource(resourceName, whichResources);
     }
 
     boolean returnOneResource(String whichResource) {
-        List<Resource> resources = whichResource.toUpperCase().equals("BOOK") ? bookList : movieList;
-        List<Resource> checkedResources = whichResource.toUpperCase().equals("MOVIE") ? checkedMovieList : checkedBookList;
-
-        String inputOfName = mockedIO.input();
-        if (inputOfName.isEmpty() || !verifyUser()) {
-//            mockedIO.output("error input");
-            return false;
-        } else {
-            Resource queriedOneResource = queryOneResource(inputOfName, checkedResources);
-            if (queriedOneResource == null) {
-                mockedIO.output("That is not a valid " + whichResource.toLowerCase() + " to return.");
-                return false;
-            } else {
-                checkedResources.remove(queriedOneResource);
-                queriedOneResource.updateHolder("PLACEHOLDER");
-                resources.add(queriedOneResource);
-                mockedIO.output("Thank you for returning the " + whichResource.toLowerCase() + ".");
-                return true;
-            }
-        }
+        String returnedResourceName = mockedIO.input();
+        boolean result = resourceManager.returnOneResource(returnedResourceName, whichResource);
+        String message = result ? "Thank you for returning the " + whichResource.toLowerCase() + "." :
+                "That is not a valid " + whichResource.toLowerCase() + " to return.";
+        mockedIO.output(message);
+        return result;
     }
 
     boolean login() {

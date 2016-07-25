@@ -13,11 +13,10 @@ public class BibliotecaTest {
     private BibliotecaApp bibliotecaApp;
     private MockedIO mockedIO = mock(MockedIO.class);
     private CustomerDataManager customerDataManager = new CustomerDataManager();
-
+    private ResourceManager resourceManager = new ResourceManager();
     @Before
     public void setUp() throws Exception {
-        bibliotecaApp = new BibliotecaApp(mockedIO, customerDataManager);
-
+        bibliotecaApp = new BibliotecaApp(mockedIO, customerDataManager, resourceManager);
         when(mockedIO.input()).thenReturn("test", "test");
         this.bibliotecaApp.login();
     }
@@ -30,24 +29,23 @@ public class BibliotecaTest {
 
     @Test
     public void shouldShowEmptyBookList() throws Exception {
-        bibliotecaApp.listRepository(bibliotecaApp.bookList);
+        bibliotecaApp.listRepository("book");
         verify(mockedIO, times(2)).output(anyString());
     }
 
     @Test
     public void shouldShowBookList() throws Exception {
-        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), "book");
 
-        bibliotecaApp.listRepository(bibliotecaApp.bookList);
-
+        bibliotecaApp.listRepository("book");
         verify(mockedIO, times(1)).output("myBook");
     }
 
     @Test
     public void shouldShowBookListWithAllAttributes() throws Exception {
-        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), "book");
 
-        bibliotecaApp.listRepositoryWithAllAttributes(bibliotecaApp.bookList);
+        bibliotecaApp.listRepositoryWithAllAttributes("book");
 
         verify(mockedIO, times(1)).output("myBook\tSli\t2016");
     }
@@ -63,7 +61,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldSelectOneOptionWhenTypeKeyword() throws Exception {
-        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), "book");
 
         when(mockedIO.input()).thenReturn("LB");
 
@@ -109,32 +107,60 @@ public class BibliotecaTest {
 
     @Test
     public void shouldNotShowCheckedBookWhenCheckOutSuccessfully() throws Exception {
-        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), "book");
 
+        bibliotecaApp.listRepository("book");    //first time to list books, should display myBook
         when(mockedIO.input()).thenReturn("myBook");
-        boolean checkoutResult = bibliotecaApp.checkoutOneResource("Book");
+        boolean checkoutResult = bibliotecaApp.checkOutOneResource("Book");
+        bibliotecaApp.listRepository("book");      //second time to list books, should not display myBook
 
         assertThat(checkoutResult, is(true));
-        assertThat(bibliotecaApp.queryOneResource("myBook", bibliotecaApp.bookList) == null, is(true));
+        verify(mockedIO, times(1)).output("myBook");     //verify that should not display checked book
     }
 
     @Test
-    public void shouldKeepCheckedBooksInCheckedBookList() throws Exception {
-        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+    public void shouldStillShowTheBookWhenCheckOutFailed() throws Exception {
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), "book");
+
+        bibliotecaApp.listRepository("book");    //first time to list books, should display myBook
+        when(mockedIO.input()).thenReturn("wrongName");
+        boolean checkoutResult = bibliotecaApp.checkOutOneResource("Book");
+        bibliotecaApp.listRepository("book");      //second time to list books, should not display myBook
+
+        assertThat(checkoutResult, is(false));
+        verify(mockedIO, times(2)).output("myBook");     //verify that should not display checked book
+    }
+
+
+    @Test
+    public void shouldKeepCheckedBooksInCheckedBookListWhenCheckOutSuccessfully() throws Exception {
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), "book");
 
         when(mockedIO.input()).thenReturn("myBook");
-        boolean checkOutResult = bibliotecaApp.checkoutOneResource("Book");
+        boolean checkOutResult = bibliotecaApp.checkOutOneResource("Book");
 
         assertThat(checkOutResult, is(true));
-        assertThat(bibliotecaApp.queryOneResource("myBook", bibliotecaApp.checkedBookList) != null, is(true));
+        assertThat(bibliotecaApp.queryOneResource("myBook", "checkedBook"), is(true));
+    }
+
+
+    @Test
+    public void shouldNotKeepCheckedBooksInCheckedBookListWhenCheckOutFailed() throws Exception {
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), "book");
+
+        when(mockedIO.input()).thenReturn("wrongName");
+        boolean checkOutResult = bibliotecaApp.checkOutOneResource("Book");
+
+        assertThat(checkOutResult, is(false));
+        assertThat(bibliotecaApp.queryOneResource("myBook", "checkedBook"), is(false));
     }
 
     @Test
     public void shouldPrintSuccessfulMessageWhenCheckOutOneBookSuccessfully() throws Exception {
-        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), "BOOK");
 
         when(mockedIO.input()).thenReturn("myBook");
-        boolean checkOutResult = bibliotecaApp.checkoutOneResource("Book");
+        boolean checkOutResult = bibliotecaApp.checkOutOneResource("BOOK");
 
         assertThat(checkOutResult, is(true));
         verify(mockedIO, times(1)).output("Thank you! Enjoy the book.");
@@ -142,37 +168,24 @@ public class BibliotecaTest {
 
     @Test
     public void shouldPrintErrorMessageWhenCheckoutBookFailed() throws Exception {
-        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Sli", "2016"), "BOOK");
 
         when(mockedIO.input()).thenReturn("wrongName");
-        boolean checkOutResult = bibliotecaApp.checkoutOneResource("Book");
+        boolean checkOutResult = bibliotecaApp.checkOutOneResource("BOOK");
 
         assertThat(checkOutResult, is(false));
         verify(mockedIO, times(1)).output("That book is not available.");
     }
 
-    @Test
-    public void shouldAddReturnedBookInBookListAndRemoveFromCheckedBookListWhenBookExistInCheckedBookList() throws Exception {
-        Book bookInList = new Book("BookInList", "author", "1");
-        Book bookInCheckedList = new Book("BookInList", "author", "1");
-
-        bibliotecaApp.addResource(bookInList, bibliotecaApp.bookList);
-        bibliotecaApp.addResource(bookInCheckedList, bibliotecaApp.checkedBookList);
-
-        when(mockedIO.input()).thenReturn("BookInList");
-        assertThat(bibliotecaApp.returnOneResource("book"), is(true));
-        assertThat(bibliotecaApp.bookList.contains(bookInCheckedList), is(true));
-        assertThat(bibliotecaApp.checkedBookList.contains(bookInCheckedList), is(false));
-    }
 
     @Test
-    public void shouldDisableSuccessfulMessageWhenBookIsValid() throws Exception {
-        Book bookInCheckedList = new Book("BookInList", "author", "1");
-        bibliotecaApp.addResource(bookInCheckedList, bibliotecaApp.checkedBookList);
+    public void shouldDisableSuccessfulMessageWhenReturnBookSuccessfully() throws Exception {
+        bibliotecaApp.addResource(new Book("BookInCheckedBookList", "author", "1"), "CHECKEDBOOK");
 
-        when(mockedIO.input()).thenReturn("BookInList");
-        assertThat(bibliotecaApp.returnOneResource("book"), is(true));
+        when(mockedIO.input()).thenReturn("BookInCheckedBookList");
+        boolean returnResourceResult = bibliotecaApp.returnOneResource("BOOK");
 
+        assertThat(returnResourceResult, is(true));
         verify(mockedIO, times(1)).output("Thank you for returning the book.");
     }
 
@@ -185,16 +198,12 @@ public class BibliotecaTest {
         verify(mockedIO, times(1)).output("That is not a valid book to return.");
     }
 
-//    List Movies -
-//    As a customer, I would like to see a list of available movies, so that I can browse for a movie that I might check-out.
-//    Movies have a name, year, director and movie rating (from 1-10 or unrated).
-
     @Test
     public void shouldShowAListOfMovies() throws Exception {
-        bibliotecaApp.addResource(new Movie("MV1", "1", "Sli", "10"), bibliotecaApp.movieList);
-        bibliotecaApp.addResource(new Movie("MV2", "2", "Sli", "1"), bibliotecaApp.movieList);
+        bibliotecaApp.addResource(new Movie("MV1", "1", "Sli", "10"), "MOVIE");
+        bibliotecaApp.addResource(new Movie("MV2", "2", "Sli", "1"), "MOVIE");
 
-        bibliotecaApp.listRepository(bibliotecaApp.movieList);
+        bibliotecaApp.listRepository("MOVIE");
 
         verify(mockedIO, times(1)).output("MV1");
         verify(mockedIO, times(1)).output("MV2");
@@ -202,10 +211,10 @@ public class BibliotecaTest {
 
     @Test
     public void shouldShowAListOfMoviesWithAttributes() throws Exception {
-        bibliotecaApp.addResource(new Movie("MV1", "1", "Sli", "10"), bibliotecaApp.movieList);
-        bibliotecaApp.addResource(new Movie("MV2", "2", "Sli", "1"), bibliotecaApp.movieList);
+        bibliotecaApp.addResource(new Movie("MV1", "1", "Sli", "10"), "MOVIE");
+        bibliotecaApp.addResource(new Movie("MV2", "2", "Sli", "1"), "MOVIE");
 
-        bibliotecaApp.listRepositoryWithAllAttributes(bibliotecaApp.movieList);
+        bibliotecaApp.listRepositoryWithAllAttributes("MOVIE");
 
         verify(mockedIO, times(1)).output("MV1\t1\tSli\t10");
         verify(mockedIO, times(1)).output("MV2\t2\tSli\t1");
@@ -213,35 +222,32 @@ public class BibliotecaTest {
 
     @Test
     public void shouldCheckOutAMovieWhenInputIsValid() throws Exception {
-        Movie movie = new Movie("MV1", "1", "Sli", "10");
-        bibliotecaApp.addResource(movie, bibliotecaApp.movieList);
+        bibliotecaApp.addResource(new Movie("MV1", "1", "Sli", "10"), "MOVIE");
 
         when(mockedIO.input()).thenReturn("MV1");
-        boolean checkoutOneMovie = bibliotecaApp.checkoutOneResource("movie");
-
+        boolean checkoutOneMovie = bibliotecaApp.checkOutOneResource("MOVIE");
 
         assertThat(checkoutOneMovie, is(true));
         verify(mockedIO, times(1)).output("Thank you! Enjoy the movie.");
-        assertThat(bibliotecaApp.queryOneResource("MV1", bibliotecaApp.checkedMovieList), is(movie));
+        assertThat(bibliotecaApp.queryOneResource("MV1", "CHECKEDMOVIE"), is(true));
     }
 
     @Test
     public void shouldCheckOutAMovieWhenInputIsInvalid() throws Exception {
-        Movie movie = new Movie("MV1", "1", "Sli", "10");
-        bibliotecaApp.addResource(movie, bibliotecaApp.movieList);
+        bibliotecaApp.addResource(new Movie("MV1", "1", "Sli", "10"), "MOVIE");
 
         when(mockedIO.input()).thenReturn("WrongName");
-        boolean checkoutOneMovie = bibliotecaApp.checkoutOneResource("movie");
+        boolean checkoutOneMovie = bibliotecaApp.checkOutOneResource("movie");
 
         assertThat(checkoutOneMovie, is(Boolean.FALSE));
         verify(mockedIO, times(1)).output("That movie is not available.");
-        assertThat(bibliotecaApp.queryOneResource("MV1", bibliotecaApp.checkedMovieList) == null, is(true));
+        assertThat(bibliotecaApp.queryOneResource("MV1", "CHECKEDMOVIE"), is(false));
     }
-
-//    User Accounts - Login -
-//    As a librarian, I want to know who has checked out a book, so that I can hold them accountable for returning it.
-//    Users must now login using their library number (which is in the format xxx-xxxx) and a password in order to
-//    check-out and return books. User credentials are predefined, so registering new users is not part of this story.
+//
+////    User Accounts - Login -
+////    As a librarian, I want to know who has checked out a book, so that I can hold them accountable for returning it.
+////    Users must now login using their library number (which is in the format xxx-xxxx) and a password in order to
+////    check-out and return books. User credentials are predefined, so registering new users is not part of this story.
 
 
     @Test
@@ -261,25 +267,26 @@ public class BibliotecaTest {
         assertThat(bibliotecaApp.getCurrentUser().getLibraryNumber(), is("123-4567"));
     }
 
-    @Test
-    public void shouldRemoteLibraryNumberToCheckedOutResource() throws Exception {
-        bibliotecaApp.addResource(new Book("myBook", "Author", "1999"), bibliotecaApp.bookList);
-
-        when(mockedIO.input()).thenReturn("123-4567", "admin", "myBook");
-        bibliotecaApp.login();
-        boolean checkOutResult = bibliotecaApp.checkoutOneResource("book");
-
-        assertThat(checkOutResult, is(true));
-        assertThat(bibliotecaApp.checkedBookList.get(0).getHolder(), is("123-4567"));
-    }
+//    @Test
+//    public void shouldRemoteLibraryNumberToCheckedOutResourceWhenCheckedOutSuccesllfully() throws Exception {
+//        bibliotecaApp.addResource(new Book("myBook", "Author", "1999"), "book");
+//
+//        when(mockedIO.input()).thenReturn("123-4567", "admin", "myBook");
+//        bibliotecaApp.login();
+//        boolean checkOutResult = bibliotecaApp.checkOutOneResource("book");
+//
+//        assertThat(checkOutResult, is(true));
+//        assertThat(bibliotecaApp.checkedBookList.get(0).getHolder(), is("123-4567"));
+//        assertThat(bibliotecaApp., is("123-4567"));
+//    }
 
     @Test
     public void shouldNotCheckOutAnyResourceWhenLoginFailedOrHaveNotLogin() throws Exception {
         bibliotecaApp.logOut();
-        bibliotecaApp.addResource(new Book("myBook", "Author", "1999"), bibliotecaApp.bookList);
+        bibliotecaApp.addResource(new Book("myBook", "Author", "1999"), "BOOK");
 
         when(mockedIO.input()).thenReturn("myBook");
-        boolean checkOutResult = bibliotecaApp.checkoutOneResource("book");
+        boolean checkOutResult = bibliotecaApp.checkOutOneResource("BOOK");
 
         assertThat(checkOutResult, is(false));
     }
