@@ -1,4 +1,7 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.User;
+
+import com.twu.biblioteca.Resource.Book;
+import com.twu.biblioteca.Resource.Movie;
 
 import java.util.List;
 
@@ -23,11 +26,11 @@ public class User {
         return name;
     }
 
-    String getLibraryNumber() {
+    public String getLibraryNumber() {
         return libraryNumber;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -39,7 +42,7 @@ public class User {
         return phone;
     }
 
-    String showProfile() {
+    public String showProfile() {
         return name + "\t" + email + "\t" + phone;
     }
 }

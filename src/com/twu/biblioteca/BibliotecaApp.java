@@ -1,19 +1,25 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Operation.Context;
+import com.twu.biblioteca.Resource.Resource;
+import com.twu.biblioteca.Resource.ResourceManager;
+import com.twu.biblioteca.User.User;
+import com.twu.biblioteca.User.UserDataManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-class BibliotecaApp {
+public class BibliotecaApp {
     private List<String> optionList = new ArrayList<>();
     private MockedIO mockedIO;
-    private CustomerDataManager customerDataManager;
+    private UserDataManager userDataManager;
     private ResourceManager resourceManager;
     private User currentUser;
 
-    BibliotecaApp(MockedIO mockedIO, CustomerDataManager customerDataManager, ResourceManager resourceManager) {
+    BibliotecaApp(MockedIO mockedIO, UserDataManager userDataManager, ResourceManager resourceManager) {
         this.mockedIO = mockedIO;
-        this.customerDataManager = customerDataManager;
+        this.userDataManager = userDataManager;
         this.resourceManager = resourceManager;
     }
 
@@ -36,7 +42,7 @@ class BibliotecaApp {
         }
     }
 
-    void listRepositoryWithAllAttributes(String whichResource) {
+    public void listRepositoryWithAllAttributes(String whichResource) {
         List<Resource> resources = resourceManager.fetchResources(whichResource);
         for (Resource resource : resources) {
             mockedIO.output(resource.getAll());
@@ -49,36 +55,41 @@ class BibliotecaApp {
         }
     }
 
-    boolean selectOption() {
-        switch (mockedIO.input().toUpperCase()) {
-            case "LB":
-                listRepositoryWithAllAttributes("book");
-                return true;
-            case "CB":
-                checkOutOneResource("Book");
-                return true;
-            case "CM":
-                checkOutOneResource("movie");
-            case "QUIT":
-                mockedIO.output("Over!");
-                return false;
-            default:
-                mockedIO.output("Select a valid option!");
-                return true;
-        }
+    boolean selectOperation() {
+        Context context = new Context();
+        String operationType = mockedIO.input();
+        return context.doOperation(this, operationType);
     }
+//
+//    switch (mockedIO.input().toUpperCase()) {
+//        case "LB":
+//            listRepositoryWithAllAttributes("book");
+//            return true;
+//        case "CB":
+//            checkOutOneResource("Book");
+//            return true;
+//        case "CM":
+//            checkOutOneResource("movie");
+//        case "QUIT":
+//            mockedIO.output("Over!");
+//            return false;
+//        default:
+//            mockedIO.output("Select a valid option!");
+//            return true;
+//    }
 
     void keepCycle() {
         showOptions();
         while (true) {
-            if (!selectOption()) {
+            if (!selectOperation()) {
+                mockedIO.output("Over!");
                 break;
             }
         }
     }
 
-    boolean checkOutOneResource(String whichResource) {
-        verifyUser();///////////////////////////
+    public boolean checkOutOneResource(String whichResource) {
+        if (!verifyUser()) return false;
 
         String resourceName = mockedIO.input();
 
@@ -98,7 +109,7 @@ class BibliotecaApp {
         return resourceManager.queryOneResource(resourceName, whichResources);
     }
 
-    boolean returnOneResource(String whichResource) {
+    public boolean returnOneResource(String whichResource) {
         String returnedResourceName = mockedIO.input();
         boolean result = resourceManager.returnOneResource(returnedResourceName, whichResource);
         String message = result ? "Thank you for returning the " + whichResource.toLowerCase() + "." :
@@ -113,7 +124,7 @@ class BibliotecaApp {
         mockedIO.output("Please input your password:");
         String password = mockedIO.input();
 
-        currentUser = customerDataManager.login(account, password);
+        currentUser = userDataManager.login(account, password);
 
         return currentUser != null;
     }

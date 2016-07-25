@@ -1,6 +1,4 @@
-package com.twu.biblioteca;
-
-import sun.awt.image.ImageWatched;
+package com.twu.biblioteca.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +9,11 @@ public class ResourceManager {
     private List<Resource> movieList = new ArrayList<>();
     private List<Resource> checkedMovieList = new ArrayList<>();
 
-    void addResource(Resource resource, String whichResources) {
+    public void addResource(Resource resource, String whichResources) {
         fetchResources(whichResources).add(resource);
     }
 
-    List<Resource> fetchResources(String whichResource) {
+    public List<Resource> fetchResources(String whichResource) {
         switch (whichResource.toUpperCase()) {
             case "BOOK":
                 return bookList;
@@ -30,7 +28,7 @@ public class ResourceManager {
         }
     }
 
-    boolean checkOutOneResource(String resourceName, String whichResource, String whichUser) {
+    public boolean checkOutOneResource(String resourceName, String whichResource, String whichUser) {
         List<Resource> resources = whichResource.toUpperCase().equals("BOOK") ? bookList : movieList;
         List<Resource> checkedResources = whichResource.toUpperCase().equals("BOOK") ? checkedBookList : checkedMovieList;
 
@@ -50,7 +48,7 @@ public class ResourceManager {
         return false;
     }
 
-    boolean queryOneResource(String resourceName, String whichResources) {
+    public boolean queryOneResource(String resourceName, String whichResources) {
         List<Resource> queriedResources;
         switch (whichResources.toUpperCase()) {
             case "BOOK":
@@ -77,14 +75,14 @@ public class ResourceManager {
         return false;
     }
 
-    boolean returnOneResource(String returnedResourceName, String whichResources) {
+    public boolean returnOneResource(String returnedResourceName, String whichResources) {
         if (returnedResourceName == null) return false;
 
         List<Resource> resources = whichResources.toUpperCase().equals("BOOK") ? bookList : movieList;
         List<Resource> checkedResources = whichResources.toUpperCase().equals("BOOK") ? checkedBookList : checkedMovieList;
 
         for (Resource checkedResource : checkedResources) {
-            if(checkedResource.getName().equals(returnedResourceName)) {
+            if (checkedResource.getName().equals(returnedResourceName)) {
                 checkedResources.remove(checkedResource);
                 checkedResource.updateHolder(null);
                 resources.add(checkedResource);
@@ -92,6 +90,6 @@ public class ResourceManager {
             }
         }
 
-        return  false;
+        return false;
     }
 }

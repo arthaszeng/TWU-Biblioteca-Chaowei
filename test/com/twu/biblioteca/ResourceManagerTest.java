@@ -1,5 +1,8 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Resource.Book;
+import com.twu.biblioteca.Resource.Resource;
+import com.twu.biblioteca.Resource.ResourceManager;
 import org.junit.Before;
 import org.junit.Test;
 

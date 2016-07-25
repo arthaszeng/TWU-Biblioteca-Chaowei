@@ -1,8 +1,10 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.Resource;
 
 //List Movies -
 //        As a customer, I would like to see a list of available movies, so that I can browse for a movie that I might check-out.
 //        Movies have a name, year, director and movie rating (from 1-10 or unrated).
+
+import com.twu.biblioteca.Resource.Resource;
 
 import java.util.Stack;
 

@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.Resource;
 
 public interface Resource {
     String getName();
