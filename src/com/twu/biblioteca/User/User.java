@@ -11,8 +11,6 @@ public class User {
     private String phone;
     private String libraryNumber;
     private String password;
-    private List<Book> bookList;
-    private List<Movie> movieList;
 
     public User(String name, String email, String phone, String libraryNumber, String password) {
         this.name = name;
@@ -22,24 +20,12 @@ public class User {
         this.password = password;
     }
 
-    String getName() {
-        return name;
-    }
-
     public String getLibraryNumber() {
         return libraryNumber;
     }
 
-    public String getPassword() {
+    String getPassword() {
         return password;
-    }
-
-    String getEmail() {
-        return email;
-    }
-
-    String getPhone() {
-        return phone;
     }
 
     public String showProfile() {

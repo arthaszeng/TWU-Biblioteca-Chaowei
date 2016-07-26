@@ -59,14 +59,18 @@ public class BibliotecaApp {
         Context context = new Context();
         String operationType = mockedIO.input();
         return context.doOperation(this, operationType);
+
+
+
+
     }
 //
 //    switch (mockedIO.input().toUpperCase()) {
 //        case "LB":
-//            listRepositoryWithAllAttributes("book");
+//            listRepositoryWithAllAttributes("BOOK");
 //            return true;
 //        case "CB":
-//            checkOutOneResource("Book");
+//            checkOutOneResource("BOOK");
 //            return true;
 //        case "CM":
 //            checkOutOneResource("movie");
@@ -77,6 +81,10 @@ public class BibliotecaApp {
 //            mockedIO.output("Select a valid option!");
 //            return true;
 //    }
+
+
+
+
 
     void keepCycle() {
         showOptions();
