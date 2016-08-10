@@ -59,32 +59,7 @@ public class BibliotecaApp {
         Context context = new Context();
         String operationType = mockedIO.input();
         return context.doOperation(this, operationType);
-
-
-
-
     }
-//
-//    switch (mockedIO.input().toUpperCase()) {
-//        case "LB":
-//            listRepositoryWithAllAttributes("BOOK");
-//            return true;
-//        case "CB":
-//            checkOutOneResource("BOOK");
-//            return true;
-//        case "CM":
-//            checkOutOneResource("movie");
-//        case "QUIT":
-//            mockedIO.output("Over!");
-//            return false;
-//        default:
-//            mockedIO.output("Select a valid option!");
-//            return true;
-//    }
-
-
-
-
 
     void keepCycle() {
         showOptions();

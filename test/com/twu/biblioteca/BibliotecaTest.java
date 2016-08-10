@@ -270,19 +270,6 @@ public class BibliotecaTest {
         assertThat(bibliotecaApp.getCurrentUser().getLibraryNumber(), is("123-4567"));
     }
 
-//    @Test
-//    public void shouldRemoteLibraryNumberToCheckedOutResourceWhenCheckedOutSuccesllfully() throws Exception {
-//        bibliotecaApp.addResource(new Book("myBook", "Author", "1999"), "book");
-//
-//        when(mockedIO.input()).thenReturn("123-4567", "admin", "myBook");
-//        bibliotecaApp.login();
-//        boolean checkOutResult = bibliotecaApp.checkOutOneResource("book");
-//
-//        assertThat(checkOutResult, is(true));
-//        assertThat(bibliotecaApp.checkedBookList.get(0).getHolder(), is("123-4567"));
-//        assertThat(bibliotecaApp., is("123-4567"));
-//    }
-
     @Test
     public void shouldNotCheckOutAnyResourceWhenLoginFailedOrHaveNotLogin() throws Exception {
         bibliotecaApp.logOut();
