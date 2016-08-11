@@ -12,19 +12,19 @@ import java.util.List;
 
 public class BibliotecaApp {
     private List<String> optionList = new ArrayList<>();
-    private MockedIO mockedIO;
+    private IO IO;
     private UserDataManager userDataManager;
     private ResourceManager resourceManager;
     private User currentUser;
 
-    BibliotecaApp(MockedIO mockedIO, UserDataManager userDataManager, ResourceManager resourceManager) {
-        this.mockedIO = mockedIO;
+    BibliotecaApp(IO IO, UserDataManager userDataManager, ResourceManager resourceManager) {
+        this.IO = IO;
         this.userDataManager = userDataManager;
         this.resourceManager = resourceManager;
     }
 
     void showWelcome() {
-        mockedIO.output("Welcome, App started");
+        IO.output("Welcome, App started");
     }
 
     void addResource(Resource resource, String whichResource) {
@@ -38,26 +38,26 @@ public class BibliotecaApp {
     void listRepository(String whichResource) {
         List<Resource> resources = resourceManager.fetchResources(whichResource);
         for (Resource resource : resources) {
-            mockedIO.output(resource.getName());
+            IO.output(resource.getName());
         }
     }
 
     public void listRepositoryWithAllAttributes(String whichResource) {
         List<Resource> resources = resourceManager.fetchResources(whichResource);
         for (Resource resource : resources) {
-            mockedIO.output(resource.getAll());
+            IO.output(resource.getAll());
         }
     }
 
     void showOptions() {
         for (String option : optionList) {
-            mockedIO.output(option);
+            IO.output(option);
         }
     }
 
     boolean selectOperation() {
         Context context = new Context();
-        String operationType = mockedIO.input();
+        String operationType = IO.input();
         return context.doOperation(this, operationType);
     }
 
@@ -65,7 +65,7 @@ public class BibliotecaApp {
         showOptions();
         while (true) {
             if (!selectOperation()) {
-                mockedIO.output("Over!");
+                IO.output("Over!");
                 break;
             }
         }
@@ -74,12 +74,12 @@ public class BibliotecaApp {
     public boolean checkOutOneResource(String whichResource) {
         if (!verifyUser()) return false;
 
-        String resourceName = mockedIO.input();
+        String resourceName = IO.input();
 
         boolean result = resourceManager.checkOutOneResource(resourceName, whichResource, currentUser.getLibraryNumber());
 
         String message = result ? "Thank you! Enjoy the " + whichResource.toLowerCase() + "." : "That " + whichResource.toLowerCase() + " is not available.";
-        mockedIO.output(message);
+        IO.output(message);
 
         return result;
     }
@@ -93,19 +93,19 @@ public class BibliotecaApp {
     }
 
     public boolean returnOneResource(String whichResource) {
-        String returnedResourceName = mockedIO.input();
+        String returnedResourceName = IO.input();
         boolean result = resourceManager.returnOneResource(returnedResourceName, whichResource);
         String message = result ? "Thank you for returning the " + whichResource.toLowerCase() + "." :
                 "That is not a valid " + whichResource.toLowerCase() + " to return.";
-        mockedIO.output(message);
+        IO.output(message);
         return result;
     }
 
     boolean login() {
-        mockedIO.output("Please input your account:");
-        String account = mockedIO.input();
-        mockedIO.output("Please input your password:");
-        String password = mockedIO.input();
+        IO.output("Please input your account:");
+        String account = IO.input();
+        IO.output("Please input your password:");
+        String password = IO.input();
 
         currentUser = userDataManager.login(account, password);
 
@@ -122,7 +122,7 @@ public class BibliotecaApp {
 
     boolean showProfile() {
         if (verifyUser()) {
-            mockedIO.output(currentUser.showProfile());
+            IO.output(currentUser.showProfile());
             return true;
         } else
             return false;

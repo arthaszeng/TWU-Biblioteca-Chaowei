@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import java.util.Scanner;
 
-class MockedIO {
+class IO {
     void output(String context) {
         System.out.println(context);
     }
