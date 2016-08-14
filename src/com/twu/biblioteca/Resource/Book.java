@@ -1,7 +1,5 @@
-package com.twu.biblioteca.Resource;
+package com.twu.biblioteca.resource;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 public class Book implements Resource {
@@ -29,10 +27,5 @@ public class Book implements Resource {
     @Override
     public void updateHolder(String libraryNumber) {
         holdersStack.push(libraryNumber);
-    }
-
-    @Override
-    public String getHolder() {
-        return holdersStack.empty() ? null : holdersStack.peek();
     }
 }

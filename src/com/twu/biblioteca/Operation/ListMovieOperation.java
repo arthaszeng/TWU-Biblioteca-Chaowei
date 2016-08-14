@@ -1,11 +1,11 @@
-package com.twu.biblioteca.Operation;
+package com.twu.biblioteca.operation;
 
-import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.Biblioteca;
 
-public class ListMovieOperation implements Operation{
+class ListMovieOperation implements OperationInterface {
     @Override
-    public boolean doOperation(BibliotecaApp bibliotecaApp) {
-        bibliotecaApp.listRepositoryWithAllAttributes("MOVIE");
+    public boolean doOperation(Biblioteca biblioteca) {
+        biblioteca.listRepositoryWithAllAttributes("MOVIE");
         return true;
     }
 }

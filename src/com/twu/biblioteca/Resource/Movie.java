@@ -1,10 +1,4 @@
-package com.twu.biblioteca.Resource;
-
-//List Movies -
-//        As a customer, I would like to see a list of available movies, so that I can browse for a movie that I might check-out.
-//        Movies have a name, year, director and movie rating (from 1-10 or unrated).
-
-import com.twu.biblioteca.Resource.Resource;
+package com.twu.biblioteca.resource;
 
 import java.util.Stack;
 
@@ -35,10 +29,5 @@ public class Movie implements Resource {
     @Override
     public void updateHolder(String libraryNumber) {
         holdersStack.push(libraryNumber);
-    }
-
-    @Override
-    public String getHolder() {
-        return holdersStack.empty() ? null : holdersStack.peek();
     }
 }

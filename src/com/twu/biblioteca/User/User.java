@@ -1,9 +1,4 @@
-package com.twu.biblioteca.User;
-
-import com.twu.biblioteca.Resource.Book;
-import com.twu.biblioteca.Resource.Movie;
-
-import java.util.List;
+package com.twu.biblioteca.user;
 
 public class User {
     private String name;

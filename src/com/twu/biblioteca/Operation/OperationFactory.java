@@ -1,4 +1,4 @@
-package com.twu.biblioteca.Operation;
+package com.twu.biblioteca.operation;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,7 @@ class OperationFactory {
     private static OperationFactory factory = new OperationFactory();
     private OperationFactory(){}
 
-    private static Map<String, Operation> operationMap = new HashMap<>();
+    private static Map<String, OperationInterface> operationMap = new HashMap<>();
 
     static{
         operationMap.put("LB", new ListBookOperation());
@@ -19,7 +19,7 @@ class OperationFactory {
         operationMap.put("QUIT", new QuitOperation());
     }
 
-    Operation creator(String type){
+    OperationInterface creator(String type){
         return operationMap.get(type);
     }
 

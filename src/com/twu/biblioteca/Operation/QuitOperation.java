@@ -1,10 +1,10 @@
-package com.twu.biblioteca.Operation;
+package com.twu.biblioteca.operation;
 
-import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.Biblioteca;
 
-class QuitOperation implements Operation{
+class QuitOperation implements OperationInterface {
     @Override
-    public boolean doOperation(BibliotecaApp bibliotecaApp) {
+    public boolean doOperation(Biblioteca biblioteca) {
         return false;
     }
 }

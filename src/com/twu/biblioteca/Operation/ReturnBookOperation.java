@@ -1,11 +1,11 @@
-package com.twu.biblioteca.Operation;
+package com.twu.biblioteca.operation;
 
-import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.Biblioteca;
 
-public class ReturnBookOperation implements Operation{
+class ReturnBookOperation implements OperationInterface {
     @Override
-    public boolean doOperation(BibliotecaApp bibliotecaApp) {
-        bibliotecaApp.returnOneResource("BOOK");
+    public boolean doOperation(Biblioteca biblioteca) {
+        biblioteca.returnOneResource("BOOK");
         return true;
     }
 }

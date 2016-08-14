@@ -1,4 +1,4 @@
-package com.twu.biblioteca.Resource;
+package com.twu.biblioteca.resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,22 +50,8 @@ public class ResourceManager {
 
     public boolean queryOneResource(String resourceName, String whichResources) {
         List<Resource> queriedResources;
-        switch (whichResources.toUpperCase()) {
-            case "BOOK":
-                queriedResources = bookList;
-                break;
-            case "CHECKEDBOOK":
-                queriedResources = checkedBookList;
-                break;
-            case "MOVIE":
-                queriedResources = movieList;
-                break;
-            case "CHECKEDMOVIE":
-                queriedResources = checkedMovieList;
-                break;
-            default:
-                return false;
-        }
+
+        queriedResources = fetchResources(whichResources.toUpperCase());
 
         for (Resource resource : queriedResources) {
             if (resource.getName().equals(resourceName)) {

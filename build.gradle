@@ -2,9 +2,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 
 repositories {
-    maven{ url 'http://maven.oschina.net/content/groups/public/'}
-    jCenter()
-    mavenCenter()
+    mavenCentral();
 }
 
 dependencies {

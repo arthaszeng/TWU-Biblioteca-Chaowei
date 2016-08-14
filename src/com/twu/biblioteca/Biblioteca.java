@@ -1,23 +1,23 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.Operation.Context;
-import com.twu.biblioteca.Resource.Resource;
-import com.twu.biblioteca.Resource.ResourceManager;
-import com.twu.biblioteca.User.User;
-import com.twu.biblioteca.User.UserDataManager;
+import com.twu.biblioteca.operation.OperationContext;
+import com.twu.biblioteca.resource.Resource;
+import com.twu.biblioteca.resource.ResourceManager;
+import com.twu.biblioteca.user.User;
+import com.twu.biblioteca.user.UserDataManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class BibliotecaApp {
+public class Biblioteca {
     private List<String> optionList = new ArrayList<>();
     private IO IO;
     private UserDataManager userDataManager;
     private ResourceManager resourceManager;
     private User currentUser;
 
-    BibliotecaApp(IO IO, UserDataManager userDataManager, ResourceManager resourceManager) {
+    Biblioteca(IO IO, UserDataManager userDataManager, ResourceManager resourceManager) {
         this.IO = IO;
         this.userDataManager = userDataManager;
         this.resourceManager = resourceManager;
@@ -56,9 +56,9 @@ public class BibliotecaApp {
     }
 
     boolean selectOperation() {
-        Context context = new Context();
+        OperationContext operationContext = new OperationContext();
         String operationType = IO.input();
-        return context.doOperation(this, operationType);
+        return operationContext.doOperation(this, operationType);
     }
 
     void keepCycle() {
